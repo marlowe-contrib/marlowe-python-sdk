@@ -25,9 +25,12 @@ jobs:
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
+      
+      - name: Remove previously generated code
+        run: xargs rm -r < .openapi-generator/FILES
 
       - name: Generate python code from specs
-        run: npx @openapitools/openapi-generator-cli generate -i openapi.json -g python
+        run: npx @openapitools/openapi-generator-cli generate -i $FILE_PATH -g python
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
