@@ -3,7 +3,6 @@ on: push
 
 env:
   FILE_PATH: openapi.json
-  OUTPUT_GEN_DIR: generated
 
 jobs:
   run:
@@ -27,11 +26,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
 
-      - name: Remove previously generated code
-        run: rm -rf $OUTPUT_GEN_DIR
-
       - name: Generate python code from specs
-        run: npx @openapitools/openapi-generator-cli generate -i openapi.json -g python -o $OUTPUT_GEN_DIR
+        run: npx @openapitools/openapi-generator-cli generate -i openapi.json -g python
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
