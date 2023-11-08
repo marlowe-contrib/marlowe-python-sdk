@@ -1,4 +1,4 @@
-name: Automatically create typescript code to interact with the API
+name: Automatically create python code to interact with the API
 on: push
 
 env:
@@ -7,7 +7,7 @@ env:
 
 jobs:
   run:
-    name: Generate code typescript to interact with the API described in openapi.json
+    name: Generate code python to interact with the API described in openapi.json
     runs-on: ubuntu-latest
     steps:
       - name: Set file path
@@ -30,7 +30,7 @@ jobs:
       - name: Remove previously generated code
         run: rm -rf $OUTPUT_GEN_DIR
 
-      - name: Generate typescript code from specs
+      - name: Generate python code from specs
         run: npx @openapitools/openapi-generator-cli generate -i openapi.json -g python -o $OUTPUT_GEN_DIR
 
       - name: Commit changes
