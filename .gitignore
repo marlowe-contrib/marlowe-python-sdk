@@ -64,3 +64,9 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+# Automatically generated CI
+.gitlab-ci.yml
+.travis.yml
+git_push.sh
+openapitools.json
