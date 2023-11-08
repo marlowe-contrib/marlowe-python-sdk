@@ -6,7 +6,7 @@ A participant in a contract
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **role_token** | **str** |  | 
-**address** | **str** | A cardano address, in Bech32 format | 
+**address** | **str** | A cardano address | 
 **ref** | **str** | An arbitrary text identifier for an object in a Marlowe object bundle. | 
 
 ## Example

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **assets** | [**Assets**](Assets.md) |  | 
 **contract_id** | **str** | A reference to a transaction output with a transaction ID and index. | 
 **payout_id** | **str** | A reference to a transaction output with a transaction ID and index. | 
-**payout_validator_address** | **str** | A cardano address, in Bech32 format | 
+**payout_validator_address** | **str** | A cardano address | 
 **role** | [**AssetId**](AssetId.md) |  | 
 **status** | [**PayoutStatus**](PayoutStatus.md) |  | 
 **withdrawal_id** | **str** | The hex-encoded identifier of a Cardano transaction | [optional] 

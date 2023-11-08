@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**address** | **str** | A cardano address, in Bech32 format | 
+**address** | **str** | A cardano address | 
 **metadata** | [**TokenMetadata**](TokenMetadata.md) |  | 
 
 ## Example
