@@ -1,4 +1,4 @@
-name: Automatically create python code to interact with the API
+name: Python code from specs
 on: push
 
 env:
@@ -6,7 +6,7 @@ env:
 
 jobs:
   run:
-    name: Generate code python to interact with the API described in openapi.json
+    name: Go code from specs in openapi.json
     runs-on: ubuntu-latest
     steps:
       - name: Set file path
@@ -25,7 +25,7 @@ jobs:
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
-      
+
       - name: Remove previously generated code
         run: xargs rm -r < .openapi-generator/FILES
 
