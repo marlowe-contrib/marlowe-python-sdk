@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@v3
 
       - name: Remove previously generated code
-        run: xargs rm -r < .openapi-generator/FILES
+        run: xargs rm -rf < .openapi-generator/FILES
 
       - name: Generate python code from specs
         run: npx @openapitools/openapi-generator-cli generate -i $FILE_PATH -g python
