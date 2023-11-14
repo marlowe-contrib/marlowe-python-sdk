@@ -39,3 +39,4 @@ requirements.txt
 setup.py
 .gitignore
 .github/
+tox.ini
