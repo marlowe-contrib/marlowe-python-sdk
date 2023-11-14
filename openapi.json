@@ -1,7 +1,7 @@
 {
   "info": {
-    "title": "",
-    "version": ""
+    "title": "Marlowe Runtime REST API",
+    "version": "0.0.5"
   },
   "paths": {
     "/contracts": {
