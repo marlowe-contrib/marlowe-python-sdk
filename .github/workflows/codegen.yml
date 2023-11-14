@@ -1,12 +1,19 @@
 name: Python code from specs
-on: push
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   FILE_PATH: openapi.json
 
 jobs:
   run:
-    name: Go code from specs in openapi.json
+    name: Python code from specs in openapi.json
     runs-on: ubuntu-latest
     steps:
       - name: Set file path
@@ -24,13 +31,24 @@ jobs:
         run: echo "HI $API_SPECS_CHANGED $FILE_PATH"
 
       - name: Set up Node.js
+        if: ENV.API_SPECS_CHANGED
         uses: actions/setup-node@v3
 
       - name: Remove previously generated code
+        if: ENV.API_SPECS_CHANGED
         run: xargs rm -rf < .openapi-generator/FILES
 
       - name: Generate python code from specs
+        if: ENV.API_SPECS_CHANGED
         run: npx @openapitools/openapi-generator-cli generate -i $FILE_PATH -g python
 
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v9
+      - name: Create pull request
+        if: ENV.API_SPECS_CHANGED
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: feat(MarloweAPIClient):api client update
+          title: Update MarloweAPIClient to match OpenAPI specs
+          body: |
+            This PR updates the MarloweAPIClient project based on the specs described in `openapi.json`
+
+          branch: api-client-codegen
