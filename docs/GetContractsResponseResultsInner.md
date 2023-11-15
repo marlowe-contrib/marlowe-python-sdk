@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **links** | [**GetContractsResponseResultsInnerLinks**](GetContractsResponseResultsInnerLinks.md) |  | 
-**resource** | [**PayoutHeader**](PayoutHeader.md) |  | 
+**resource** | [**ContractHeader**](ContractHeader.md) |  | 
 
 ## Example
 

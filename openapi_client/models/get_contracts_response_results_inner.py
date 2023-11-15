@@ -20,15 +20,15 @@ import json
 
 
 from pydantic import BaseModel, Field
+from openapi_client.models.contract_header import ContractHeader
 from openapi_client.models.get_contracts_response_results_inner_links import GetContractsResponseResultsInnerLinks
-from openapi_client.models.payout_header import PayoutHeader
 
 class GetContractsResponseResultsInner(BaseModel):
     """
     GetContractsResponseResultsInner
     """
     links: GetContractsResponseResultsInnerLinks = Field(...)
-    resource: PayoutHeader = Field(...)
+    resource: ContractHeader = Field(...)
     __properties = ["links", "resource"]
 
     class Config:
@@ -74,7 +74,7 @@ class GetContractsResponseResultsInner(BaseModel):
 
         _obj = GetContractsResponseResultsInner.parse_obj({
             "links": GetContractsResponseResultsInnerLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None,
-            "resource": PayoutHeader.from_dict(obj.get("resource")) if obj.get("resource") is not None else None
+            "resource": ContractHeader.from_dict(obj.get("resource")) if obj.get("resource") is not None else None
         })
         return _obj
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **contract** | [**PostContractsRequestContract**](PostContractsRequestContract.md) |  | 
 **metadata** | **Dict[str, object]** |  | 
-**min_utx_o_deposit** | **int** |  | 
+**min_utx_o_deposit** | **int** |  | [optional] 
 **roles** | [**RolesConfig**](RolesConfig.md) |  | [optional] 
 **tags** | **Dict[str, object]** |  | 
 **version** | [**MarloweVersion**](MarloweVersion.md) |  | 

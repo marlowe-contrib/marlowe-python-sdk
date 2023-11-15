@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**links** | [**WithdrawPayoutsResponseLinks**](WithdrawPayoutsResponseLinks.md) |  | 
-**resource** | [**ApplyInputsTxEnvelope**](ApplyInputsTxEnvelope.md) |  | 
+**links** | [**GetWithdrawalsResponseResultsInnerLinks**](GetWithdrawalsResponseResultsInnerLinks.md) |  | 
+**resource** | [**WithdrawTxEnvelope**](WithdrawTxEnvelope.md) |  | 
 
 ## Example
 

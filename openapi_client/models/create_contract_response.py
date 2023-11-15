@@ -20,15 +20,15 @@ import json
 
 
 from pydantic import BaseModel, Field
-from openapi_client.models.apply_inputs_tx_envelope import ApplyInputsTxEnvelope
 from openapi_client.models.create_contract_response_links import CreateContractResponseLinks
+from openapi_client.models.create_tx_envelope import CreateTxEnvelope
 
 class CreateContractResponse(BaseModel):
     """
     CreateContractResponse
     """
     links: CreateContractResponseLinks = Field(...)
-    resource: ApplyInputsTxEnvelope = Field(...)
+    resource: CreateTxEnvelope = Field(...)
     __properties = ["links", "resource"]
 
     class Config:
@@ -74,7 +74,7 @@ class CreateContractResponse(BaseModel):
 
         _obj = CreateContractResponse.parse_obj({
             "links": CreateContractResponseLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None,
-            "resource": ApplyInputsTxEnvelope.from_dict(obj.get("resource")) if obj.get("resource") is not None else None
+            "resource": CreateTxEnvelope.from_dict(obj.get("resource")) if obj.get("resource") is not None else None
         })
         return _obj
 

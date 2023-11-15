@@ -25,8 +25,9 @@ class GetContractsResponseResultsInnerLinks(BaseModel):
     """
     GetContractsResponseResultsInnerLinks
     """
-    payout: Optional[StrictStr] = None
-    __properties = ["payout"]
+    contract: Optional[StrictStr] = None
+    transactions: Optional[StrictStr] = None
+    __properties = ["contract", "transactions"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,7 +65,8 @@ class GetContractsResponseResultsInnerLinks(BaseModel):
             return GetContractsResponseResultsInnerLinks.parse_obj(obj)
 
         _obj = GetContractsResponseResultsInnerLinks.parse_obj({
-            "payout": obj.get("payout")
+            "contract": obj.get("contract"),
+            "transactions": obj.get("transactions")
         })
         return _obj
 

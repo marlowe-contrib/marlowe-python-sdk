@@ -4,8 +4,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**address** | **str** | A cardano address | 
+**address** | **str** | A cardano address, in Bech32 format | 
 **metadata** | [**TokenMetadata**](TokenMetadata.md) |  | 
+**script** | **str** | The type of script receiving the role token. | 
 
 ## Example
 

@@ -20,15 +20,15 @@ import json
 
 
 from pydantic import BaseModel, Field
-from openapi_client.models.apply_inputs_tx_envelope import ApplyInputsTxEnvelope
-from openapi_client.models.withdraw_payouts_response_links import WithdrawPayoutsResponseLinks
+from openapi_client.models.get_withdrawals_response_results_inner_links import GetWithdrawalsResponseResultsInnerLinks
+from openapi_client.models.withdraw_tx_envelope import WithdrawTxEnvelope
 
 class WithdrawPayoutsResponse(BaseModel):
     """
     WithdrawPayoutsResponse
     """
-    links: WithdrawPayoutsResponseLinks = Field(...)
-    resource: ApplyInputsTxEnvelope = Field(...)
+    links: GetWithdrawalsResponseResultsInnerLinks = Field(...)
+    resource: WithdrawTxEnvelope = Field(...)
     __properties = ["links", "resource"]
 
     class Config:
@@ -73,8 +73,8 @@ class WithdrawPayoutsResponse(BaseModel):
             return WithdrawPayoutsResponse.parse_obj(obj)
 
         _obj = WithdrawPayoutsResponse.parse_obj({
-            "links": WithdrawPayoutsResponseLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None,
-            "resource": ApplyInputsTxEnvelope.from_dict(obj.get("resource")) if obj.get("resource") is not None else None
+            "links": GetWithdrawalsResponseResultsInnerLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None,
+            "resource": WithdrawTxEnvelope.from_dict(obj.get("resource")) if obj.get("resource") is not None else None
         })
         return _obj
 
