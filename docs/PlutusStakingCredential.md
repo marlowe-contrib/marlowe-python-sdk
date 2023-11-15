@@ -5,7 +5,7 @@ A Plutus staking credential.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**staking_hash** | [**List[PlutusStakingCredentialOneOf1StakingHashInner]**](PlutusStakingCredentialOneOf1StakingHashInner.md) |  | 
+**staking_hash** | **List[int]** |  | 
 
 ## Example
 

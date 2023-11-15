@@ -1,11 +1,13 @@
 # ApplyInputsTxEnvelope
 
+The \"type\" property of \"tx\" must be \"Tx BabbageEra\" or \"Tx ConwayEra\"
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**contract_id** | **str** | A reference to a transaction output with a transaction ID and index. | 
+**transaction_id** | **str** | The hex-encoded identifier of a Cardano transaction | 
 **tx** | [**TextEnvelope**](TextEnvelope.md) |  | 
-**withdrawal_id** | **str** | The hex-encoded identifier of a Cardano transaction | 
 
 ## Example
 

@@ -4,7 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payout** | **str** |  | [optional] 
+**contract** | **str** |  | [optional] 
+**transactions** | **str** |  | [optional] 
 
 ## Example
 

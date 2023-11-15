@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **links** | [**CreateContractResponseLinks**](CreateContractResponseLinks.md) |  | 
-**resource** | [**ApplyInputsTxEnvelope**](ApplyInputsTxEnvelope.md) |  | 
+**resource** | [**CreateTxEnvelope**](CreateTxEnvelope.md) |  | 
 
 ## Example
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cbor_hex** | **str** |  | 
 **description** | **str** |  | 
-**type** | **str** |  | 
+**type** | **str** | What type of data is encoded in the CBOR Hex. Valid values include \&quot;Tx &lt;era&gt;\&quot;, \&quot;TxBody &lt;era&gt;\&quot;, and \&quot;ShelleyTxWitness &lt;era&gt;\&quot; where &lt;era&gt; is one of \&quot;BabbageEra\&quot;, \&quot;ConwayEra\&quot;. | 
 
 ## Example
 
