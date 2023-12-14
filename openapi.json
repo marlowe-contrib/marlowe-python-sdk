@@ -248,13 +248,13 @@
           },
           "blockNo": {
             "format": "int64",
-            "maximum": 1.8446744073709551615e19,
+            "maximum": 18446744073709551616,
             "minimum": 0,
             "type": "integer"
           },
           "slotNo": {
             "format": "int64",
-            "maximum": 1.8446744073709551615e19,
+            "maximum": 18446744073709551616,
             "minimum": 0,
             "type": "integer"
           }
