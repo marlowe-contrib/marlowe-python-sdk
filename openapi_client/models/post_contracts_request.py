@@ -62,7 +62,6 @@ class PostContractsRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        print("NASHE {}, self: {}".format(_dict, self))
         # override the default output from pydantic by calling `to_dict()` of contract
         if self.contract:
             _dict['contract'] = self.contract.to_dict()
