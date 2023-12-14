@@ -27,7 +27,7 @@ class MetadataAndRecipients(BaseModel):
     MetadataAndRecipients
     """
     metadata: Optional[TokenMetadata] = None
-    recipients: Dict[str, conint(strict=True, le=384, ge=0)] = Field(...)
+    recipients: Dict[str, conint(strict=True, le=9223372036854775807, ge=0)] = Field(...)
     __properties = ["metadata", "recipients"]
 
     class Config:
