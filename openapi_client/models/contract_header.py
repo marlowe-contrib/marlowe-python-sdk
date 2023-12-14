@@ -18,10 +18,11 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
+from typing import Dict, Optional
 from pydantic import BaseModel, Field, StrictStr, constr, validator
 from openapi_client.models.block_header import BlockHeader
 from openapi_client.models.marlowe_version import MarloweVersion
+from openapi_client.models.metadata import Metadata
 from openapi_client.models.tx_status import TxStatus
 
 class ContractHeader(BaseModel):
@@ -31,10 +32,10 @@ class ContractHeader(BaseModel):
     block: Optional[BlockHeader] = None
     continuations: Optional[StrictStr] = None
     contract_id: constr(strict=True) = Field(..., alias="contractId", description="A reference to a transaction output with a transaction ID and index.")
-    metadata: Dict[str, Any] = Field(...)
+    metadata: Dict[str, Metadata] = Field(...)
     role_token_minting_policy_id: constr(strict=True) = Field(..., alias="roleTokenMintingPolicyId", description="The hex-encoded minting policy ID for a native Cardano token")
     status: TxStatus = Field(...)
-    tags: Dict[str, Any] = Field(...)
+    tags: Dict[str, Metadata] = Field(...)
     version: MarloweVersion = Field(...)
     __properties = ["block", "continuations", "contractId", "metadata", "roleTokenMintingPolicyId", "status", "tags", "version"]
 
@@ -79,6 +80,20 @@ class ContractHeader(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of block
         if self.block:
             _dict['block'] = self.block.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key in self.metadata:
+                if self.metadata[_key]:
+                    _field_dict[_key] = self.metadata[_key].to_dict()
+            _dict['metadata'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in tags (dict)
+        _field_dict = {}
+        if self.tags:
+            for _key in self.tags:
+                if self.tags[_key]:
+                    _field_dict[_key] = self.tags[_key].to_dict()
+            _dict['tags'] = _field_dict
         return _dict
 
     @classmethod
@@ -94,10 +109,20 @@ class ContractHeader(BaseModel):
             "block": BlockHeader.from_dict(obj.get("block")) if obj.get("block") is not None else None,
             "continuations": obj.get("continuations"),
             "contract_id": obj.get("contractId"),
-            "metadata": obj.get("metadata"),
+            "metadata": dict(
+                (_k, Metadata.from_dict(_v))
+                for _k, _v in obj.get("metadata").items()
+            )
+            if obj.get("metadata") is not None
+            else None,
             "role_token_minting_policy_id": obj.get("roleTokenMintingPolicyId"),
             "status": obj.get("status"),
-            "tags": obj.get("tags"),
+            "tags": dict(
+                (_k, Metadata.from_dict(_v))
+                for _k, _v in obj.get("tags").items()
+            )
+            if obj.get("tags") is not None
+            else None,
             "version": obj.get("version")
         })
         return _obj

@@ -20,23 +20,23 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.plutus_staking_credential_one_of import PlutusStakingCredentialOneOf
-from openapi_client.models.plutus_staking_credential_one_of1 import PlutusStakingCredentialOneOf1
+from openapi_client.models.staking_hash import StakingHash
+from openapi_client.models.staking_pointer import StakingPointer
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-PLUTUSSTAKINGCREDENTIAL_ONE_OF_SCHEMAS = ["PlutusStakingCredentialOneOf", "PlutusStakingCredentialOneOf1"]
+PLUTUSSTAKINGCREDENTIAL_ONE_OF_SCHEMAS = ["StakingHash", "StakingPointer"]
 
 class PlutusStakingCredential(BaseModel):
     """
     A Plutus staking credential.
     """
-    # data type: PlutusStakingCredentialOneOf
-    oneof_schema_1_validator: Optional[PlutusStakingCredentialOneOf] = None
-    # data type: PlutusStakingCredentialOneOf1
-    oneof_schema_2_validator: Optional[PlutusStakingCredentialOneOf1] = None
+    # data type: StakingHash
+    oneof_schema_1_validator: Optional[StakingHash] = None
+    # data type: StakingPointer
+    oneof_schema_2_validator: Optional[StakingPointer] = None
     if TYPE_CHECKING:
-        actual_instance: Union[PlutusStakingCredentialOneOf, PlutusStakingCredentialOneOf1]
+        actual_instance: Union[StakingHash, StakingPointer]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(PLUTUSSTAKINGCREDENTIAL_ONE_OF_SCHEMAS, const=True)
@@ -59,22 +59,22 @@ class PlutusStakingCredential(BaseModel):
         instance = PlutusStakingCredential.construct()
         error_messages = []
         match = 0
-        # validate data type: PlutusStakingCredentialOneOf
-        if not isinstance(v, PlutusStakingCredentialOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PlutusStakingCredentialOneOf`")
+        # validate data type: StakingHash
+        if not isinstance(v, StakingHash):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `StakingHash`")
         else:
             match += 1
-        # validate data type: PlutusStakingCredentialOneOf1
-        if not isinstance(v, PlutusStakingCredentialOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PlutusStakingCredentialOneOf1`")
+        # validate data type: StakingPointer
+        if not isinstance(v, StakingPointer):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `StakingPointer`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in PlutusStakingCredential with oneOf schemas: PlutusStakingCredentialOneOf, PlutusStakingCredentialOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in PlutusStakingCredential with oneOf schemas: StakingHash, StakingPointer. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in PlutusStakingCredential with oneOf schemas: PlutusStakingCredentialOneOf, PlutusStakingCredentialOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in PlutusStakingCredential with oneOf schemas: StakingHash, StakingPointer. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -89,25 +89,25 @@ class PlutusStakingCredential(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into PlutusStakingCredentialOneOf
+        # deserialize data into StakingHash
         try:
-            instance.actual_instance = PlutusStakingCredentialOneOf.from_json(json_str)
+            instance.actual_instance = StakingHash.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into PlutusStakingCredentialOneOf1
+        # deserialize data into StakingPointer
         try:
-            instance.actual_instance = PlutusStakingCredentialOneOf1.from_json(json_str)
+            instance.actual_instance = StakingPointer.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into PlutusStakingCredential with oneOf schemas: PlutusStakingCredentialOneOf, PlutusStakingCredentialOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into PlutusStakingCredential with oneOf schemas: StakingHash, StakingPointer. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into PlutusStakingCredential with oneOf schemas: PlutusStakingCredentialOneOf, PlutusStakingCredentialOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into PlutusStakingCredential with oneOf schemas: StakingHash, StakingPointer. Details: " + ", ".join(error_messages))
         else:
             return instance
 

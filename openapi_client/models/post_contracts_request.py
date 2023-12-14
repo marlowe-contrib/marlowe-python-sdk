@@ -18,9 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, conint
+from typing import Dict, Optional
+from pydantic import BaseModel, Field, StrictStr, conint
 from openapi_client.models.marlowe_version import MarloweVersion
+from openapi_client.models.metadata import Metadata
 from openapi_client.models.post_contracts_request_contract import PostContractsRequestContract
 from openapi_client.models.roles_config import RolesConfig
 
@@ -29,12 +30,13 @@ class PostContractsRequest(BaseModel):
     PostContractsRequest
     """
     contract: PostContractsRequestContract = Field(...)
-    metadata: Dict[str, Any] = Field(...)
-    min_utx_o_deposit: Optional[conint(strict=True, le=-1, ge=0)] = Field(None, alias="minUTxODeposit")
+    metadata: Dict[str, Metadata] = Field(...)
+    min_utx_o_deposit: Optional[conint(strict=True, le=384, ge=0)] = Field(None, alias="minUTxODeposit")
     roles: Optional[RolesConfig] = None
-    tags: Dict[str, Any] = Field(...)
+    tags: Dict[str, Metadata] = Field(...)
+    thread_token_name: Optional[StrictStr] = Field(None, alias="threadTokenName")
     version: MarloweVersion = Field(...)
-    __properties = ["contract", "metadata", "minUTxODeposit", "roles", "tags", "version"]
+    __properties = ["contract", "metadata", "minUTxODeposit", "roles", "tags", "threadTokenName", "version"]
 
     class Config:
         """Pydantic configuration"""
@@ -63,9 +65,23 @@ class PostContractsRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of contract
         if self.contract:
             _dict['contract'] = self.contract.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key in self.metadata:
+                if self.metadata[_key]:
+                    _field_dict[_key] = self.metadata[_key].to_dict()
+            _dict['metadata'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of roles
         if self.roles:
             _dict['roles'] = self.roles.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in tags (dict)
+        _field_dict = {}
+        if self.tags:
+            for _key in self.tags:
+                if self.tags[_key]:
+                    _field_dict[_key] = self.tags[_key].to_dict()
+            _dict['tags'] = _field_dict
         return _dict
 
     @classmethod
@@ -79,10 +95,21 @@ class PostContractsRequest(BaseModel):
 
         _obj = PostContractsRequest.parse_obj({
             "contract": PostContractsRequestContract.from_dict(obj.get("contract")) if obj.get("contract") is not None else None,
-            "metadata": obj.get("metadata"),
+            "metadata": dict(
+                (_k, Metadata.from_dict(_v))
+                for _k, _v in obj.get("metadata").items()
+            )
+            if obj.get("metadata") is not None
+            else None,
             "min_utx_o_deposit": obj.get("minUTxODeposit"),
             "roles": RolesConfig.from_dict(obj.get("roles")) if obj.get("roles") is not None else None,
-            "tags": obj.get("tags"),
+            "tags": dict(
+                (_k, Metadata.from_dict(_v))
+                for _k, _v in obj.get("tags").items()
+            )
+            if obj.get("tags") is not None
+            else None,
+            "thread_token_name": obj.get("threadTokenName"),
             "version": obj.get("version")
         })
         return _obj

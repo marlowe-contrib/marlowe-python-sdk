@@ -5,8 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **address** | **str** | A cardano address, in Bech32 format | 
-**metadata** | [**TokenMetadata**](TokenMetadata.md) |  | 
+**metadata** | [**TokenMetadata**](TokenMetadata.md) |  | [optional] 
 **script** | **str** | The type of script receiving the role token. | 
+**recipients** | **Dict[str, int]** |  | 
 
 ## Example
 

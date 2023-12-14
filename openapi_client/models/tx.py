@@ -18,13 +18,14 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist, constr, validator
 from openapi_client.models.assets import Assets
 from openapi_client.models.block_header import BlockHeader
 from openapi_client.models.contract import Contract
 from openapi_client.models.input import Input
 from openapi_client.models.marlowe_state import MarloweState
+from openapi_client.models.metadata import Metadata
 from openapi_client.models.payout import Payout
 from openapi_client.models.text_envelope import TextEnvelope
 from openapi_client.models.tx_status import TxStatus
@@ -38,20 +39,20 @@ class Tx(BaseModel):
     consuming_tx: Optional[constr(strict=True)] = Field(None, alias="consumingTx", description="The hex-encoded identifier of a Cardano transaction")
     continuations: Optional[StrictStr] = None
     contract_id: constr(strict=True) = Field(..., alias="contractId", description="A reference to a transaction output with a transaction ID and index.")
-    input_utxo: constr(strict=True) = Field(..., alias="inputUtxo", description="A reference to a transaction output with a transaction ID and index.")
     inputs: conlist(Input) = Field(...)
+    input_utxo: constr(strict=True) = Field(..., alias="inputUtxo", description="A reference to a transaction output with a transaction ID and index.")
     invalid_before: StrictStr = Field(..., alias="invalidBefore")
     invalid_hereafter: StrictStr = Field(..., alias="invalidHereafter")
-    metadata: Dict[str, Any] = Field(...)
+    metadata: Dict[str, Metadata] = Field(...)
     output_contract: Optional[Contract] = Field(None, alias="outputContract")
     output_state: Optional[MarloweState] = Field(None, alias="outputState")
     output_utxo: Optional[constr(strict=True)] = Field(None, alias="outputUtxo", description="A reference to a transaction output with a transaction ID and index.")
     payouts: conlist(Payout) = Field(...)
     status: TxStatus = Field(...)
-    tags: Dict[str, Any] = Field(...)
+    tags: Dict[str, Metadata] = Field(...)
     transaction_id: constr(strict=True) = Field(..., alias="transactionId", description="The hex-encoded identifier of a Cardano transaction")
     tx_body: Optional[TextEnvelope] = Field(None, alias="txBody")
-    __properties = ["assets", "block", "consumingTx", "continuations", "contractId", "inputUtxo", "inputs", "invalidBefore", "invalidHereafter", "metadata", "outputContract", "outputState", "outputUtxo", "payouts", "status", "tags", "transactionId", "txBody"]
+    __properties = ["assets", "block", "consumingTx", "continuations", "contractId", "inputs", "inputUtxo", "invalidBefore", "invalidHereafter", "metadata", "outputContract", "outputState", "outputUtxo", "payouts", "status", "tags", "transactionId", "txBody"]
 
     @validator('consuming_tx')
     def consuming_tx_validate_regular_expression(cls, value):
@@ -131,6 +132,13 @@ class Tx(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['inputs'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key in self.metadata:
+                if self.metadata[_key]:
+                    _field_dict[_key] = self.metadata[_key].to_dict()
+            _dict['metadata'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of output_contract
         if self.output_contract:
             _dict['outputContract'] = self.output_contract.to_dict()
@@ -144,6 +152,13 @@ class Tx(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['payouts'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each value in tags (dict)
+        _field_dict = {}
+        if self.tags:
+            for _key in self.tags:
+                if self.tags[_key]:
+                    _field_dict[_key] = self.tags[_key].to_dict()
+            _dict['tags'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of tx_body
         if self.tx_body:
             _dict['txBody'] = self.tx_body.to_dict()
@@ -164,17 +179,27 @@ class Tx(BaseModel):
             "consuming_tx": obj.get("consumingTx"),
             "continuations": obj.get("continuations"),
             "contract_id": obj.get("contractId"),
-            "input_utxo": obj.get("inputUtxo"),
             "inputs": [Input.from_dict(_item) for _item in obj.get("inputs")] if obj.get("inputs") is not None else None,
+            "input_utxo": obj.get("inputUtxo"),
             "invalid_before": obj.get("invalidBefore"),
             "invalid_hereafter": obj.get("invalidHereafter"),
-            "metadata": obj.get("metadata"),
+            "metadata": dict(
+                (_k, Metadata.from_dict(_v))
+                for _k, _v in obj.get("metadata").items()
+            )
+            if obj.get("metadata") is not None
+            else None,
             "output_contract": Contract.from_dict(obj.get("outputContract")) if obj.get("outputContract") is not None else None,
             "output_state": MarloweState.from_dict(obj.get("outputState")) if obj.get("outputState") is not None else None,
             "output_utxo": obj.get("outputUtxo"),
             "payouts": [Payout.from_dict(_item) for _item in obj.get("payouts")] if obj.get("payouts") is not None else None,
             "status": obj.get("status"),
-            "tags": obj.get("tags"),
+            "tags": dict(
+                (_k, Metadata.from_dict(_v))
+                for _k, _v in obj.get("tags").items()
+            )
+            if obj.get("tags") is not None
+            else None,
             "transaction_id": obj.get("transactionId"),
             "tx_body": TextEnvelope.from_dict(obj.get("txBody")) if obj.get("txBody") is not None else None
         })

@@ -18,13 +18,14 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist, constr, validator
 from openapi_client.models.assets import Assets
 from openapi_client.models.block_header import BlockHeader
 from openapi_client.models.contract import Contract
 from openapi_client.models.marlowe_state import MarloweState
 from openapi_client.models.marlowe_version import MarloweVersion
+from openapi_client.models.metadata import Metadata
 from openapi_client.models.payout import Payout
 from openapi_client.models.text_envelope import TextEnvelope
 from openapi_client.models.tx_status import TxStatus
@@ -39,11 +40,11 @@ class ContractState(BaseModel):
     contract_id: constr(strict=True) = Field(..., alias="contractId", description="A reference to a transaction output with a transaction ID and index.")
     current_contract: Optional[Contract] = Field(None, alias="currentContract")
     initial_contract: Contract = Field(..., alias="initialContract")
-    metadata: Dict[str, Any] = Field(...)
+    metadata: Dict[str, Metadata] = Field(...)
     role_token_minting_policy_id: constr(strict=True) = Field(..., alias="roleTokenMintingPolicyId", description="The hex-encoded minting policy ID for a native Cardano token")
     state: Optional[MarloweState] = None
     status: TxStatus = Field(...)
-    tags: Dict[str, Any] = Field(...)
+    tags: Dict[str, Metadata] = Field(...)
     tx_body: Optional[TextEnvelope] = Field(None, alias="txBody")
     unclaimed_payouts: conlist(Payout) = Field(..., alias="unclaimedPayouts")
     utxo: Optional[constr(strict=True)] = Field(None, description="A reference to a transaction output with a transaction ID and index.")
@@ -110,9 +111,23 @@ class ContractState(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of initial_contract
         if self.initial_contract:
             _dict['initialContract'] = self.initial_contract.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key in self.metadata:
+                if self.metadata[_key]:
+                    _field_dict[_key] = self.metadata[_key].to_dict()
+            _dict['metadata'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of state
         if self.state:
             _dict['state'] = self.state.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in tags (dict)
+        _field_dict = {}
+        if self.tags:
+            for _key in self.tags:
+                if self.tags[_key]:
+                    _field_dict[_key] = self.tags[_key].to_dict()
+            _dict['tags'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of tx_body
         if self.tx_body:
             _dict['txBody'] = self.tx_body.to_dict()
@@ -141,11 +156,21 @@ class ContractState(BaseModel):
             "contract_id": obj.get("contractId"),
             "current_contract": Contract.from_dict(obj.get("currentContract")) if obj.get("currentContract") is not None else None,
             "initial_contract": Contract.from_dict(obj.get("initialContract")) if obj.get("initialContract") is not None else None,
-            "metadata": obj.get("metadata"),
+            "metadata": dict(
+                (_k, Metadata.from_dict(_v))
+                for _k, _v in obj.get("metadata").items()
+            )
+            if obj.get("metadata") is not None
+            else None,
             "role_token_minting_policy_id": obj.get("roleTokenMintingPolicyId"),
             "state": MarloweState.from_dict(obj.get("state")) if obj.get("state") is not None else None,
             "status": obj.get("status"),
-            "tags": obj.get("tags"),
+            "tags": dict(
+                (_k, Metadata.from_dict(_v))
+                for _k, _v in obj.get("tags").items()
+            )
+            if obj.get("tags") is not None
+            else None,
             "tx_body": TextEnvelope.from_dict(obj.get("txBody")) if obj.get("txBody") is not None else None,
             "unclaimed_payouts": [Payout.from_dict(_item) for _item in obj.get("unclaimedPayouts")] if obj.get("unclaimedPayouts") is not None else None,
             "utxo": obj.get("utxo"),

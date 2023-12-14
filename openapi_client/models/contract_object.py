@@ -20,32 +20,33 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.action_object_one_of import ActionObjectOneOf
+from openapi_client.models.close_object import CloseObject
+from openapi_client.models.label_ref import LabelRef
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-CONTRACTOBJECT_ONE_OF_SCHEMAS = ["ActionObjectOneOf", "ContractObjectOneOf", "ContractObjectOneOf1", "ContractObjectOneOf2", "ContractObjectOneOf3", "ContractObjectOneOf4", "str"]
+CONTRACTOBJECT_ONE_OF_SCHEMAS = ["AssertObject", "CloseObject", "IfObject", "LabelRef", "LetObject", "PayObject", "WhenObject"]
 
 class ContractObject(BaseModel):
     """
     Contract terms specified in Marlowe
     """
-    # data type: str
-    oneof_schema_1_validator: Optional[StrictStr] = Field(None, description="No more payments will be sent and the balance of the contract is 0.")
-    # data type: ContractObjectOneOf
-    oneof_schema_2_validator: Optional[ContractObjectOneOf] = None
-    # data type: ContractObjectOneOf1
-    oneof_schema_3_validator: Optional[ContractObjectOneOf1] = None
-    # data type: ContractObjectOneOf2
-    oneof_schema_4_validator: Optional[ContractObjectOneOf2] = None
-    # data type: ContractObjectOneOf3
-    oneof_schema_5_validator: Optional[ContractObjectOneOf3] = None
-    # data type: ContractObjectOneOf4
-    oneof_schema_6_validator: Optional[ContractObjectOneOf4] = None
-    # data type: ActionObjectOneOf
-    oneof_schema_7_validator: Optional[ActionObjectOneOf] = None
+    # data type: CloseObject
+    oneof_schema_1_validator: Optional[CloseObject] = None
+    # data type: PayObject
+    oneof_schema_2_validator: Optional[PayObject] = None
+    # data type: IfObject
+    oneof_schema_3_validator: Optional[IfObject] = None
+    # data type: WhenObject
+    oneof_schema_4_validator: Optional[WhenObject] = None
+    # data type: LetObject
+    oneof_schema_5_validator: Optional[LetObject] = None
+    # data type: AssertObject
+    oneof_schema_6_validator: Optional[AssertObject] = None
+    # data type: LabelRef
+    oneof_schema_7_validator: Optional[LabelRef] = None
     if TYPE_CHECKING:
-        actual_instance: Union[ActionObjectOneOf, ContractObjectOneOf, ContractObjectOneOf1, ContractObjectOneOf2, ContractObjectOneOf3, ContractObjectOneOf4, str]
+        actual_instance: Union[AssertObject, CloseObject, IfObject, LabelRef, LetObject, PayObject, WhenObject]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(CONTRACTOBJECT_ONE_OF_SCHEMAS, const=True)
@@ -68,48 +69,47 @@ class ContractObject(BaseModel):
         instance = ContractObject.construct()
         error_messages = []
         match = 0
-        # validate data type: str
-        try:
-            instance.oneof_schema_1_validator = v
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # validate data type: ContractObjectOneOf
-        if not isinstance(v, ContractObjectOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ContractObjectOneOf`")
+        # validate data type: CloseObject
+        if not isinstance(v, CloseObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CloseObject`")
         else:
             match += 1
-        # validate data type: ContractObjectOneOf1
-        if not isinstance(v, ContractObjectOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ContractObjectOneOf1`")
+        # validate data type: PayObject
+        if not isinstance(v, PayObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PayObject`")
         else:
             match += 1
-        # validate data type: ContractObjectOneOf2
-        if not isinstance(v, ContractObjectOneOf2):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ContractObjectOneOf2`")
+        # validate data type: IfObject
+        if not isinstance(v, IfObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `IfObject`")
         else:
             match += 1
-        # validate data type: ContractObjectOneOf3
-        if not isinstance(v, ContractObjectOneOf3):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ContractObjectOneOf3`")
+        # validate data type: WhenObject
+        if not isinstance(v, WhenObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `WhenObject`")
         else:
             match += 1
-        # validate data type: ContractObjectOneOf4
-        if not isinstance(v, ContractObjectOneOf4):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ContractObjectOneOf4`")
+        # validate data type: LetObject
+        if not isinstance(v, LetObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `LetObject`")
         else:
             match += 1
-        # validate data type: ActionObjectOneOf
-        if not isinstance(v, ActionObjectOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ActionObjectOneOf`")
+        # validate data type: AssertObject
+        if not isinstance(v, AssertObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `AssertObject`")
+        else:
+            match += 1
+        # validate data type: LabelRef
+        if not isinstance(v, LabelRef):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `LabelRef`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ContractObject with oneOf schemas: ActionObjectOneOf, ContractObjectOneOf, ContractObjectOneOf1, ContractObjectOneOf2, ContractObjectOneOf3, ContractObjectOneOf4, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ContractObject with oneOf schemas: AssertObject, CloseObject, IfObject, LabelRef, LetObject, PayObject, WhenObject. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ContractObject with oneOf schemas: ActionObjectOneOf, ContractObjectOneOf, ContractObjectOneOf1, ContractObjectOneOf2, ContractObjectOneOf3, ContractObjectOneOf4, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ContractObject with oneOf schemas: AssertObject, CloseObject, IfObject, LabelRef, LetObject, PayObject, WhenObject. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -124,58 +124,55 @@ class ContractObject(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into str
+        # deserialize data into CloseObject
         try:
-            # validation
-            instance.oneof_schema_1_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.oneof_schema_1_validator
+            instance.actual_instance = CloseObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ContractObjectOneOf
+        # deserialize data into PayObject
         try:
-            instance.actual_instance = ContractObjectOneOf.from_json(json_str)
+            instance.actual_instance = PayObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ContractObjectOneOf1
+        # deserialize data into IfObject
         try:
-            instance.actual_instance = ContractObjectOneOf1.from_json(json_str)
+            instance.actual_instance = IfObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ContractObjectOneOf2
+        # deserialize data into WhenObject
         try:
-            instance.actual_instance = ContractObjectOneOf2.from_json(json_str)
+            instance.actual_instance = WhenObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ContractObjectOneOf3
+        # deserialize data into LetObject
         try:
-            instance.actual_instance = ContractObjectOneOf3.from_json(json_str)
+            instance.actual_instance = LetObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ContractObjectOneOf4
+        # deserialize data into AssertObject
         try:
-            instance.actual_instance = ContractObjectOneOf4.from_json(json_str)
+            instance.actual_instance = AssertObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ActionObjectOneOf
+        # deserialize data into LabelRef
         try:
-            instance.actual_instance = ActionObjectOneOf.from_json(json_str)
+            instance.actual_instance = LabelRef.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ContractObject with oneOf schemas: ActionObjectOneOf, ContractObjectOneOf, ContractObjectOneOf1, ContractObjectOneOf2, ContractObjectOneOf3, ContractObjectOneOf4, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ContractObject with oneOf schemas: AssertObject, CloseObject, IfObject, LabelRef, LetObject, PayObject, WhenObject. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ContractObject with oneOf schemas: ActionObjectOneOf, ContractObjectOneOf, ContractObjectOneOf1, ContractObjectOneOf2, ContractObjectOneOf3, ContractObjectOneOf4, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ContractObject with oneOf schemas: AssertObject, CloseObject, IfObject, LabelRef, LetObject, PayObject, WhenObject. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -206,10 +203,10 @@ class ContractObject(BaseModel):
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.dict())
 
-from openapi_client.models.contract_object_one_of import ContractObjectOneOf
-from openapi_client.models.contract_object_one_of1 import ContractObjectOneOf1
-from openapi_client.models.contract_object_one_of2 import ContractObjectOneOf2
-from openapi_client.models.contract_object_one_of3 import ContractObjectOneOf3
-from openapi_client.models.contract_object_one_of4 import ContractObjectOneOf4
+from openapi_client.models.assert_object import AssertObject
+from openapi_client.models.if_object import IfObject
+from openapi_client.models.let_object import LetObject
+from openapi_client.models.pay_object import PayObject
+from openapi_client.models.when_object import WhenObject
 ContractObject.update_forward_refs()
 
