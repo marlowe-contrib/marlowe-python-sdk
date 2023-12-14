@@ -32,9 +32,7 @@ class Metadata(BaseModel):
     # data type: int
     oneof_schema_1_validator: Optional[StrictInt] = None
     # data type: str
-    oneof_schema_2_validator: Optional[constr(strict=True)] = Field(None, description="Hex-encoded binary data of up to 64 bytes")
-    # data type: str
-    oneof_schema_3_validator: Optional[StrictStr] = Field(None, description="Text data of up to 64 characters")
+    oneof_schema_3_validator: Optional[str] = Field(None, description="Text data of up to 64 characters")
     # data type: List[Metadata]
     oneof_schema_4_validator: Optional[conlist(Metadata)] = Field(None, description="Array of metadata values")
     # data type: Dict[str, Metadata]
@@ -60,6 +58,10 @@ class Metadata(BaseModel):
 
     @validator('actual_instance')
     def actual_instance_must_validate_oneof(cls, v):
+        """Validate that the value is valid for oneOf schemas"""
+        if v is None:
+            return v
+        
         instance = Metadata.construct()
         error_messages = []
         match = 0
@@ -71,14 +73,10 @@ class Metadata(BaseModel):
             error_messages.append(str(e))
         # validate data type: str
         try:
-            instance.oneof_schema_2_validator = v
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # validate data type: str
-        try:
-            instance.oneof_schema_3_validator = v
-            match += 1
+            # without this if v is an int, it will be converted to a string and pass validation
+            if isinstance(v, str):
+                instance.oneof_schema_3_validator = v
+                match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # validate data type: List[Metadata]
@@ -89,8 +87,10 @@ class Metadata(BaseModel):
             error_messages.append(str(e))
         # validate data type: Dict[str, Metadata]
         try:
-            instance.oneof_schema_5_validator = v
-            match += 1
+            # without this, if v is an empty string it will be converted to a dict and pass validation
+            if isinstance(v, dict):
+                instance.oneof_schema_5_validator = v
+                match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         if match > 1:
@@ -109,6 +109,15 @@ class Metadata(BaseModel):
     @classmethod
     def from_json(cls, json_str: str) -> Metadata:
         """Returns the object represented by the json string"""
+        try:
+            data = json.loads(json_str)
+        except json.JSONDecodeError:
+            raise ValueError("Invalid JSON string")
+
+        # if data is a primitive type, return the instance
+        if isinstance(data, int | str| None):
+            return cls(actual_instance=data)
+        
         instance = Metadata.construct()
         error_messages = []
         match = 0
@@ -122,15 +131,7 @@ class Metadata(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into str
-        try:
-            # validation
-            instance.oneof_schema_2_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.oneof_schema_2_validator
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
+
         # deserialize data into str
         try:
             # validation
@@ -140,22 +141,32 @@ class Metadata(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+
         # deserialize data into List[Metadata]
         try:
             # validation
-            instance.oneof_schema_4_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.oneof_schema_4_validator
-            match += 1
+            data = json.loads(json_str)
+            if isinstance(data, list):
+                instance.oneof_schema_4_validator = [cls.from_json(json.dumps(item)) for item in data]
+                # assign value to actual_instance
+                instance.actual_instance = instance.oneof_schema_4_validator
+                match += 1
+            else:
+                raise ValueError("Data is not a list")
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into Dict[str, Metadata]
+
+        # deserialize data into Dict[str,k Metadata]
         try:
             # validation
-            instance.oneof_schema_5_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.oneof_schema_5_validator
-            match += 1
+            data = json.loads(json_str)
+            if isinstance(data, dict):
+                instance.oneof_schema_5_validator = {k: cls.from_json(json.dumps(v)) for k, v in data.items()}
+                # assign value to actual_instance
+                instance.actual_instance = instance.oneof_schema_5_validator
+                match += 1
+            else:
+                raise ValueError("Data is not a dictionary")
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
