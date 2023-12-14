@@ -31,7 +31,7 @@ class PostContractsRequest(BaseModel):
     """
     contract: PostContractsRequestContract = Field(...)
     metadata: Dict[str, Metadata] = Field(...)
-    min_utx_o_deposit: Optional[conint(strict=True, le=384, ge=0)] = Field(None, alias="minUTxODeposit")
+    min_utx_o_deposit: Optional[conint(strict=True, le=9223372036854775807, ge=0)] = Field(None, alias="minUTxODeposit")
     roles: Optional[RolesConfig] = None
     tags: Dict[str, Metadata] = Field(...)
     thread_token_name: Optional[StrictStr] = Field(None, alias="threadTokenName")
@@ -62,6 +62,7 @@ class PostContractsRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        print("NASHE {}, self: {}".format(_dict, self))
         # override the default output from pydantic by calling `to_dict()` of contract
         if self.contract:
             _dict['contract'] = self.contract.to_dict()
