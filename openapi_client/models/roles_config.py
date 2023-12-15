@@ -26,12 +26,16 @@ from pydantic import StrictStr, Field
 
 ROLESCONFIG_ONE_OF_SCHEMAS = ["Dict[str, RoleTokenConfig]", "str"]
 
+
 class RolesConfig(BaseModel):
     """
     RolesConfig
     """
+
     # data type: str
-    oneof_schema_1_validator: Optional[constr(strict=True)] = Field(None, description="The hex-encoded minting policy ID for a native Cardano token")
+    oneof_schema_1_validator: Optional[constr(strict=True)] = Field(
+        None, description="The hex-encoded minting policy ID for a native Cardano token"
+    )
     # data type: Dict[str, RoleTokenConfig]
     oneof_schema_2_validator: Optional[Dict[str, RoleTokenConfig]] = None
     if TYPE_CHECKING:
@@ -46,14 +50,18 @@ class RolesConfig(BaseModel):
     def __init__(self, *args, **kwargs) -> None:
         if args:
             if len(args) > 1:
-                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+                raise ValueError(
+                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
+                )
             if kwargs:
-                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+                raise ValueError(
+                    "If a position argument is used, keyword arguments cannot be used."
+                )
             super().__init__(actual_instance=args[0])
         else:
             super().__init__(**kwargs)
 
-    @validator('actual_instance')
+    @validator("actual_instance")
     def actual_instance_must_validate_oneof(cls, v):
         instance = RolesConfig.construct()
         error_messages = []
@@ -72,10 +80,16 @@ class RolesConfig(BaseModel):
             error_messages.append(str(e))
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in RolesConfig with oneOf schemas: Dict[str, RoleTokenConfig], str. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in RolesConfig with oneOf schemas: Dict[str, RoleTokenConfig], str. Details: "
+                + ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in RolesConfig with oneOf schemas: Dict[str, RoleTokenConfig], str. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in RolesConfig with oneOf schemas: Dict[str, RoleTokenConfig], str. Details: "
+                + ", ".join(error_messages)
+            )
         else:
             return v
 
@@ -102,19 +116,31 @@ class RolesConfig(BaseModel):
         # deserialize data into Dict[str, RoleTokenConfig]
         try:
             # validation
-            instance.oneof_schema_2_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.oneof_schema_2_validator
-            match += 1
+            data = json.loads(json_str)
+            if isinstance(data, dict):
+                instance.oneof_schema_2_validator = {
+                    k: RoleTokenConfig.from_json(json.dumps(v)) for k, v in data.items()
+                }
+                # assign value to actual_instance
+                instance.actual_instance = instance.oneof_schema_2_validator
+                match += 1
+            else:
+                ValueError("Data must be Dict[str, RoleTokenConfig]")
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into RolesConfig with oneOf schemas: Dict[str, RoleTokenConfig], str. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into RolesConfig with oneOf schemas: Dict[str, RoleTokenConfig], str. Details: "
+                + ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into RolesConfig with oneOf schemas: Dict[str, RoleTokenConfig], str. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into RolesConfig with oneOf schemas: Dict[str, RoleTokenConfig], str. Details: "
+                + ", ".join(error_messages)
+            )
         else:
             return instance
 
@@ -144,5 +170,3 @@ class RolesConfig(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.dict())
-
-
