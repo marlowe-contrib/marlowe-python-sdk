@@ -166,10 +166,10 @@ class TestParsingResponses:
         self.api_instance = openapi_client.DefaultApi(api_client)
 
     def test_get_contracts(self):
-        api_response = self.api_instance.get_contracts()
+        self.api_instance.get_contracts()
 
     def test_create_contract(self):
-        api_response = self.api_instance.create_contract(
+        self.api_instance.create_contract(
             post_contracts_request=openapi_client.PostContractsRequest(
                 contract=openapi_client.PostContractsRequestContract(swap_contract),
                 metadata={},
@@ -191,36 +191,61 @@ class TestParsingResponses:
         )
 
     def test_upload_contract_sources(self):
-        uploaded_res = upload_contract_sources(self.api_instance)
+        upload_contract_sources(self.api_instance)
 
     def test_get_contract_source_by_id(self):
-        source_id_res = self.api_instance.get_contract_source_by_id(
+        self.api_instance.get_contract_source_by_id(
             "705f33bb023b560f458a277c12130487f8dbca1b9e4dc50c4ed1596e00944996"
         )
 
     def test_get_contract_source_adjacency(self):
-        source_adj_res = self.api_instance.get_contract_source_adjacency(
+        self.api_instance.get_contract_source_adjacency(
             "705f33bb023b560f458a277c12130487f8dbca1b9e4dc50c4ed1596e00944996"
         )
 
     def test_get_contract_source_closure(self):
-        source_closure_res = self.api_instance.get_contract_source_closure(
+        self.api_instance.get_contract_source_closure(
             "705f33bb023b560f458a277c12130487f8dbca1b9e4dc50c4ed1596e00944996"
         )
 
     def test_get_contract_by_id(self):
-        contract_by_id_res = self.api_instance.get_contract_by_id(
+        self.api_instance.get_contract_by_id(
             "14a950e998711bb16c72fdd0bd707b4a306daf38bc1fc2e560aae3409dd30c25#1"
         )
 
     def test_get_next_steps(self):
-        next_steps_res = self.api_instance.get_next_steps_for_contract(
+        self.api_instance.get_next_steps_for_contract(
             contract_id="26a9d99e3a014b7dafc21642c829b5f51edd8f74f45f13d965e967df182156eb#1",
             validity_start="1970-12-06T00:00:00.000Z",
             validity_end="2050-01-01T00:00:00.000Z",
         )
 
     def test_get_transactions_for_contract(self):
-        transactions_res = self.api_instance.get_transactions_for_contract(
+        self.api_instance.get_transactions_for_contract(
             contract_id="06fb28e1322bb2d366617e6fbaed22ed93a8ca2b813964ade5621c4b8fba1ee8#1",
+        )
+
+    def test_get_contract_transaction_by_id(self):
+        contract_id = (
+            "06fb28e1322bb2d366617e6fbaed22ed93a8ca2b813964ade5621c4b8fba1ee8#1"
+        )
+        transaction_id = (
+            "981455f49fe566765d8380ad2199ee265ab9128902630780d4d7258a40c9d310"
+        )
+        self.api_instance.get_contract_transaction_by_id(
+            contract_id=contract_id, transaction_id=transaction_id
+        )
+
+    def test_healthcheck(self):
+        self.api_instance.healthcheck()
+
+    def test_get_payouts(self):
+        self.api_instance.get_payouts()
+
+    def test_get_withdrawals(self):
+        self.api_instance.get_withdrawals()
+
+    def test_get_withdrawal_by_id(self):
+        self.api_instance.get_withdrawal_by_id(
+            withdrawal_id="e68b8034f4d93c4e53468198abdcbe938d067605310ece35ebe681d61c961e1c"
         )
