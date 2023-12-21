@@ -20,23 +20,23 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.party_one_of import PartyOneOf
-from openapi_client.models.party_one_of1 import PartyOneOf1
+from openapi_client.models.party_address import PartyAddress
+from openapi_client.models.party_role_name import PartyRoleName
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-PARTY_ONE_OF_SCHEMAS = ["PartyOneOf", "PartyOneOf1"]
+PARTY_ONE_OF_SCHEMAS = ["PartyAddress", "PartyRoleName"]
 
 class Party(BaseModel):
     """
     A participant in a contract
     """
-    # data type: PartyOneOf
-    oneof_schema_1_validator: Optional[PartyOneOf] = None
-    # data type: PartyOneOf1
-    oneof_schema_2_validator: Optional[PartyOneOf1] = None
+    # data type: PartyRoleName
+    oneof_schema_1_validator: Optional[PartyRoleName] = None
+    # data type: PartyAddress
+    oneof_schema_2_validator: Optional[PartyAddress] = None
     if TYPE_CHECKING:
-        actual_instance: Union[PartyOneOf, PartyOneOf1]
+        actual_instance: Union[PartyAddress, PartyRoleName]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(PARTY_ONE_OF_SCHEMAS, const=True)
@@ -59,22 +59,22 @@ class Party(BaseModel):
         instance = Party.construct()
         error_messages = []
         match = 0
-        # validate data type: PartyOneOf
-        if not isinstance(v, PartyOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PartyOneOf`")
+        # validate data type: PartyRoleName
+        if not isinstance(v, PartyRoleName):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PartyRoleName`")
         else:
             match += 1
-        # validate data type: PartyOneOf1
-        if not isinstance(v, PartyOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PartyOneOf1`")
+        # validate data type: PartyAddress
+        if not isinstance(v, PartyAddress):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PartyAddress`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in Party with oneOf schemas: PartyOneOf, PartyOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in Party with oneOf schemas: PartyAddress, PartyRoleName. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in Party with oneOf schemas: PartyOneOf, PartyOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in Party with oneOf schemas: PartyAddress, PartyRoleName. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -89,25 +89,25 @@ class Party(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into PartyOneOf
+        # deserialize data into PartyRoleName
         try:
-            instance.actual_instance = PartyOneOf.from_json(json_str)
+            instance.actual_instance = PartyRoleName.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into PartyOneOf1
+        # deserialize data into PartyAddress
         try:
-            instance.actual_instance = PartyOneOf1.from_json(json_str)
+            instance.actual_instance = PartyAddress.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into Party with oneOf schemas: PartyOneOf, PartyOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into Party with oneOf schemas: PartyAddress, PartyRoleName. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into Party with oneOf schemas: PartyOneOf, PartyOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into Party with oneOf schemas: PartyAddress, PartyRoleName. Details: " + ", ".join(error_messages))
         else:
             return instance
 

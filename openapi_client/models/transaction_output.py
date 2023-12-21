@@ -20,23 +20,23 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.transaction_output_one_of import TransactionOutputOneOf
-from openapi_client.models.transaction_output_one_of1 import TransactionOutputOneOf1
+from openapi_client.models.tx_output_error import TxOutputError
+from openapi_client.models.tx_output_success import TxOutputSuccess
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-TRANSACTIONOUTPUT_ONE_OF_SCHEMAS = ["TransactionOutputOneOf", "TransactionOutputOneOf1"]
+TRANSACTIONOUTPUT_ONE_OF_SCHEMAS = ["TxOutputError", "TxOutputSuccess"]
 
 class TransactionOutput(BaseModel):
     """
     Marlowe transaction output.
     """
-    # data type: TransactionOutputOneOf
-    oneof_schema_1_validator: Optional[TransactionOutputOneOf] = None
-    # data type: TransactionOutputOneOf1
-    oneof_schema_2_validator: Optional[TransactionOutputOneOf1] = None
+    # data type: TxOutputSuccess
+    oneof_schema_1_validator: Optional[TxOutputSuccess] = None
+    # data type: TxOutputError
+    oneof_schema_2_validator: Optional[TxOutputError] = None
     if TYPE_CHECKING:
-        actual_instance: Union[TransactionOutputOneOf, TransactionOutputOneOf1]
+        actual_instance: Union[TxOutputError, TxOutputSuccess]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(TRANSACTIONOUTPUT_ONE_OF_SCHEMAS, const=True)
@@ -59,22 +59,22 @@ class TransactionOutput(BaseModel):
         instance = TransactionOutput.construct()
         error_messages = []
         match = 0
-        # validate data type: TransactionOutputOneOf
-        if not isinstance(v, TransactionOutputOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionOutputOneOf`")
+        # validate data type: TxOutputSuccess
+        if not isinstance(v, TxOutputSuccess):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TxOutputSuccess`")
         else:
             match += 1
-        # validate data type: TransactionOutputOneOf1
-        if not isinstance(v, TransactionOutputOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionOutputOneOf1`")
+        # validate data type: TxOutputError
+        if not isinstance(v, TxOutputError):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TxOutputError`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionOutput with oneOf schemas: TransactionOutputOneOf, TransactionOutputOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionOutput with oneOf schemas: TxOutputError, TxOutputSuccess. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TransactionOutput with oneOf schemas: TransactionOutputOneOf, TransactionOutputOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TransactionOutput with oneOf schemas: TxOutputError, TxOutputSuccess. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -89,25 +89,25 @@ class TransactionOutput(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into TransactionOutputOneOf
+        # deserialize data into TxOutputSuccess
         try:
-            instance.actual_instance = TransactionOutputOneOf.from_json(json_str)
+            instance.actual_instance = TxOutputSuccess.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into TransactionOutputOneOf1
+        # deserialize data into TxOutputError
         try:
-            instance.actual_instance = TransactionOutputOneOf1.from_json(json_str)
+            instance.actual_instance = TxOutputError.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionOutput with oneOf schemas: TransactionOutputOneOf, TransactionOutputOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionOutput with oneOf schemas: TxOutputError, TxOutputSuccess. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into TransactionOutput with oneOf schemas: TransactionOutputOneOf, TransactionOutputOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into TransactionOutput with oneOf schemas: TxOutputError, TxOutputSuccess. Details: " + ", ".join(error_messages))
         else:
             return instance
 

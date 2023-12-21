@@ -20,12 +20,12 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictBool, StrictStr, ValidationError, validator
-from openapi_client.models.action_object_one_of import ActionObjectOneOf
-from openapi_client.models.observation_object_one_of3 import ObservationObjectOneOf3
+from openapi_client.models.choose_for_object import ChooseForObject
+from openapi_client.models.label_ref import LabelRef
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-OBSERVATIONOBJECT_ONE_OF_SCHEMAS = ["ActionObjectOneOf", "ObservationObjectOneOf", "ObservationObjectOneOf1", "ObservationObjectOneOf2", "ObservationObjectOneOf3", "ObservationObjectOneOf4", "ObservationObjectOneOf5", "ObservationObjectOneOf6", "ObservationObjectOneOf7", "ObservationObjectOneOf8", "bool"]
+OBSERVATIONOBJECT_ONE_OF_SCHEMAS = ["AndObject", "ChooseForObject", "EqualObject", "GreaterObject", "GreaterOrEqualObject", "LabelRef", "LesserObject", "LesserOrEqualObject", "NotObject", "OrObject", "bool"]
 
 class ObservationObject(BaseModel):
     """
@@ -33,28 +33,28 @@ class ObservationObject(BaseModel):
     """
     # data type: bool
     oneof_schema_1_validator: Optional[StrictBool] = None
-    # data type: ObservationObjectOneOf
-    oneof_schema_2_validator: Optional[ObservationObjectOneOf] = None
-    # data type: ObservationObjectOneOf1
-    oneof_schema_3_validator: Optional[ObservationObjectOneOf1] = None
-    # data type: ObservationObjectOneOf2
-    oneof_schema_4_validator: Optional[ObservationObjectOneOf2] = None
-    # data type: ObservationObjectOneOf3
-    oneof_schema_5_validator: Optional[ObservationObjectOneOf3] = None
-    # data type: ObservationObjectOneOf4
-    oneof_schema_6_validator: Optional[ObservationObjectOneOf4] = None
-    # data type: ObservationObjectOneOf5
-    oneof_schema_7_validator: Optional[ObservationObjectOneOf5] = None
-    # data type: ObservationObjectOneOf6
-    oneof_schema_8_validator: Optional[ObservationObjectOneOf6] = None
-    # data type: ObservationObjectOneOf7
-    oneof_schema_9_validator: Optional[ObservationObjectOneOf7] = None
-    # data type: ObservationObjectOneOf8
-    oneof_schema_10_validator: Optional[ObservationObjectOneOf8] = None
-    # data type: ActionObjectOneOf
-    oneof_schema_11_validator: Optional[ActionObjectOneOf] = None
+    # data type: AndObject
+    oneof_schema_2_validator: Optional[AndObject] = None
+    # data type: OrObject
+    oneof_schema_3_validator: Optional[OrObject] = None
+    # data type: NotObject
+    oneof_schema_4_validator: Optional[NotObject] = None
+    # data type: ChooseForObject
+    oneof_schema_5_validator: Optional[ChooseForObject] = None
+    # data type: GreaterOrEqualObject
+    oneof_schema_6_validator: Optional[GreaterOrEqualObject] = None
+    # data type: GreaterObject
+    oneof_schema_7_validator: Optional[GreaterObject] = None
+    # data type: LesserObject
+    oneof_schema_8_validator: Optional[LesserObject] = None
+    # data type: LesserOrEqualObject
+    oneof_schema_9_validator: Optional[LesserOrEqualObject] = None
+    # data type: EqualObject
+    oneof_schema_10_validator: Optional[EqualObject] = None
+    # data type: LabelRef
+    oneof_schema_11_validator: Optional[LabelRef] = None
     if TYPE_CHECKING:
-        actual_instance: Union[ActionObjectOneOf, ObservationObjectOneOf, ObservationObjectOneOf1, ObservationObjectOneOf2, ObservationObjectOneOf3, ObservationObjectOneOf4, ObservationObjectOneOf5, ObservationObjectOneOf6, ObservationObjectOneOf7, ObservationObjectOneOf8, bool]
+        actual_instance: Union[AndObject, ChooseForObject, EqualObject, GreaterObject, GreaterOrEqualObject, LabelRef, LesserObject, LesserOrEqualObject, NotObject, OrObject, bool]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(OBSERVATIONOBJECT_ONE_OF_SCHEMAS, const=True)
@@ -83,62 +83,62 @@ class ObservationObject(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # validate data type: ObservationObjectOneOf
-        if not isinstance(v, ObservationObjectOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationObjectOneOf`")
+        # validate data type: AndObject
+        if not isinstance(v, AndObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `AndObject`")
         else:
             match += 1
-        # validate data type: ObservationObjectOneOf1
-        if not isinstance(v, ObservationObjectOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationObjectOneOf1`")
+        # validate data type: OrObject
+        if not isinstance(v, OrObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `OrObject`")
         else:
             match += 1
-        # validate data type: ObservationObjectOneOf2
-        if not isinstance(v, ObservationObjectOneOf2):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationObjectOneOf2`")
+        # validate data type: NotObject
+        if not isinstance(v, NotObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `NotObject`")
         else:
             match += 1
-        # validate data type: ObservationObjectOneOf3
-        if not isinstance(v, ObservationObjectOneOf3):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationObjectOneOf3`")
+        # validate data type: ChooseForObject
+        if not isinstance(v, ChooseForObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ChooseForObject`")
         else:
             match += 1
-        # validate data type: ObservationObjectOneOf4
-        if not isinstance(v, ObservationObjectOneOf4):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationObjectOneOf4`")
+        # validate data type: GreaterOrEqualObject
+        if not isinstance(v, GreaterOrEqualObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `GreaterOrEqualObject`")
         else:
             match += 1
-        # validate data type: ObservationObjectOneOf5
-        if not isinstance(v, ObservationObjectOneOf5):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationObjectOneOf5`")
+        # validate data type: GreaterObject
+        if not isinstance(v, GreaterObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `GreaterObject`")
         else:
             match += 1
-        # validate data type: ObservationObjectOneOf6
-        if not isinstance(v, ObservationObjectOneOf6):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationObjectOneOf6`")
+        # validate data type: LesserObject
+        if not isinstance(v, LesserObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `LesserObject`")
         else:
             match += 1
-        # validate data type: ObservationObjectOneOf7
-        if not isinstance(v, ObservationObjectOneOf7):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationObjectOneOf7`")
+        # validate data type: LesserOrEqualObject
+        if not isinstance(v, LesserOrEqualObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `LesserOrEqualObject`")
         else:
             match += 1
-        # validate data type: ObservationObjectOneOf8
-        if not isinstance(v, ObservationObjectOneOf8):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationObjectOneOf8`")
+        # validate data type: EqualObject
+        if not isinstance(v, EqualObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `EqualObject`")
         else:
             match += 1
-        # validate data type: ActionObjectOneOf
-        if not isinstance(v, ActionObjectOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ActionObjectOneOf`")
+        # validate data type: LabelRef
+        if not isinstance(v, LabelRef):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `LabelRef`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ObservationObject with oneOf schemas: ActionObjectOneOf, ObservationObjectOneOf, ObservationObjectOneOf1, ObservationObjectOneOf2, ObservationObjectOneOf3, ObservationObjectOneOf4, ObservationObjectOneOf5, ObservationObjectOneOf6, ObservationObjectOneOf7, ObservationObjectOneOf8, bool. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ObservationObject with oneOf schemas: AndObject, ChooseForObject, EqualObject, GreaterObject, GreaterOrEqualObject, LabelRef, LesserObject, LesserOrEqualObject, NotObject, OrObject, bool. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ObservationObject with oneOf schemas: ActionObjectOneOf, ObservationObjectOneOf, ObservationObjectOneOf1, ObservationObjectOneOf2, ObservationObjectOneOf3, ObservationObjectOneOf4, ObservationObjectOneOf5, ObservationObjectOneOf6, ObservationObjectOneOf7, ObservationObjectOneOf8, bool. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ObservationObject with oneOf schemas: AndObject, ChooseForObject, EqualObject, GreaterObject, GreaterOrEqualObject, LabelRef, LesserObject, LesserOrEqualObject, NotObject, OrObject, bool. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -162,73 +162,73 @@ class ObservationObject(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationObjectOneOf
+        # deserialize data into AndObject
         try:
-            instance.actual_instance = ObservationObjectOneOf.from_json(json_str)
+            instance.actual_instance = AndObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationObjectOneOf1
+        # deserialize data into OrObject
         try:
-            instance.actual_instance = ObservationObjectOneOf1.from_json(json_str)
+            instance.actual_instance = OrObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationObjectOneOf2
+        # deserialize data into NotObject
         try:
-            instance.actual_instance = ObservationObjectOneOf2.from_json(json_str)
+            instance.actual_instance = NotObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationObjectOneOf3
+        # deserialize data into ChooseForObject
         try:
-            instance.actual_instance = ObservationObjectOneOf3.from_json(json_str)
+            instance.actual_instance = ChooseForObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationObjectOneOf4
+        # deserialize data into GreaterOrEqualObject
         try:
-            instance.actual_instance = ObservationObjectOneOf4.from_json(json_str)
+            instance.actual_instance = GreaterOrEqualObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationObjectOneOf5
+        # deserialize data into GreaterObject
         try:
-            instance.actual_instance = ObservationObjectOneOf5.from_json(json_str)
+            instance.actual_instance = GreaterObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationObjectOneOf6
+        # deserialize data into LesserObject
         try:
-            instance.actual_instance = ObservationObjectOneOf6.from_json(json_str)
+            instance.actual_instance = LesserObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationObjectOneOf7
+        # deserialize data into LesserOrEqualObject
         try:
-            instance.actual_instance = ObservationObjectOneOf7.from_json(json_str)
+            instance.actual_instance = LesserOrEqualObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationObjectOneOf8
+        # deserialize data into EqualObject
         try:
-            instance.actual_instance = ObservationObjectOneOf8.from_json(json_str)
+            instance.actual_instance = EqualObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ActionObjectOneOf
+        # deserialize data into LabelRef
         try:
-            instance.actual_instance = ActionObjectOneOf.from_json(json_str)
+            instance.actual_instance = LabelRef.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ObservationObject with oneOf schemas: ActionObjectOneOf, ObservationObjectOneOf, ObservationObjectOneOf1, ObservationObjectOneOf2, ObservationObjectOneOf3, ObservationObjectOneOf4, ObservationObjectOneOf5, ObservationObjectOneOf6, ObservationObjectOneOf7, ObservationObjectOneOf8, bool. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ObservationObject with oneOf schemas: AndObject, ChooseForObject, EqualObject, GreaterObject, GreaterOrEqualObject, LabelRef, LesserObject, LesserOrEqualObject, NotObject, OrObject, bool. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ObservationObject with oneOf schemas: ActionObjectOneOf, ObservationObjectOneOf, ObservationObjectOneOf1, ObservationObjectOneOf2, ObservationObjectOneOf3, ObservationObjectOneOf4, ObservationObjectOneOf5, ObservationObjectOneOf6, ObservationObjectOneOf7, ObservationObjectOneOf8, bool. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ObservationObject with oneOf schemas: AndObject, ChooseForObject, EqualObject, GreaterObject, GreaterOrEqualObject, LabelRef, LesserObject, LesserOrEqualObject, NotObject, OrObject, bool. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -259,13 +259,13 @@ class ObservationObject(BaseModel):
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.dict())
 
-from openapi_client.models.observation_object_one_of import ObservationObjectOneOf
-from openapi_client.models.observation_object_one_of1 import ObservationObjectOneOf1
-from openapi_client.models.observation_object_one_of2 import ObservationObjectOneOf2
-from openapi_client.models.observation_object_one_of4 import ObservationObjectOneOf4
-from openapi_client.models.observation_object_one_of5 import ObservationObjectOneOf5
-from openapi_client.models.observation_object_one_of6 import ObservationObjectOneOf6
-from openapi_client.models.observation_object_one_of7 import ObservationObjectOneOf7
-from openapi_client.models.observation_object_one_of8 import ObservationObjectOneOf8
+from openapi_client.models.and_object import AndObject
+from openapi_client.models.equal_object import EqualObject
+from openapi_client.models.greater_object import GreaterObject
+from openapi_client.models.greater_or_equal_object import GreaterOrEqualObject
+from openapi_client.models.lesser_object import LesserObject
+from openapi_client.models.lesser_or_equal_object import LesserOrEqualObject
+from openapi_client.models.not_object import NotObject
+from openapi_client.models.or_object import OrObject
 ObservationObject.update_forward_refs()
 

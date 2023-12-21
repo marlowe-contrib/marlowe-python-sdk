@@ -20,22 +20,22 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictInt, StrictStr, ValidationError, conlist, validator
-from openapi_client.models.marlowe_state_accounts_inner_inner_one_of_inner import MarloweStateAccountsInnerInnerOneOfInner
+from openapi_client.models.account_token_tuple_inner import AccountTokenTupleInner
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-MARLOWESTATEACCOUNTSINNERINNER_ONE_OF_SCHEMAS = ["List[MarloweStateAccountsInnerInnerOneOfInner]", "int"]
+MARLOWESTATEACCOUNTSINNERINNER_ONE_OF_SCHEMAS = ["List[AccountTokenTupleInner]", "int"]
 
 class MarloweStateAccountsInnerInner(BaseModel):
     """
     MarloweStateAccountsInnerInner
     """
-    # data type: List[MarloweStateAccountsInnerInnerOneOfInner]
-    oneof_schema_1_validator: Optional[conlist(MarloweStateAccountsInnerInnerOneOfInner, max_items=2, min_items=2)] = None
+    # data type: List[AccountTokenTupleInner]
+    oneof_schema_1_validator: Optional[conlist(AccountTokenTupleInner, max_items=2, min_items=2)] = None
     # data type: int
     oneof_schema_2_validator: Optional[StrictInt] = None
     if TYPE_CHECKING:
-        actual_instance: Union[List[MarloweStateAccountsInnerInnerOneOfInner], int]
+        actual_instance: Union[List[AccountTokenTupleInner], int]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(MARLOWESTATEACCOUNTSINNERINNER_ONE_OF_SCHEMAS, const=True)
@@ -58,7 +58,7 @@ class MarloweStateAccountsInnerInner(BaseModel):
         instance = MarloweStateAccountsInnerInner.construct()
         error_messages = []
         match = 0
-        # validate data type: List[MarloweStateAccountsInnerInnerOneOfInner]
+        # validate data type: List[AccountTokenTupleInner]
         try:
             instance.oneof_schema_1_validator = v
             match += 1
@@ -72,10 +72,10 @@ class MarloweStateAccountsInnerInner(BaseModel):
             error_messages.append(str(e))
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in MarloweStateAccountsInnerInner with oneOf schemas: List[MarloweStateAccountsInnerInnerOneOfInner], int. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in MarloweStateAccountsInnerInner with oneOf schemas: List[AccountTokenTupleInner], int. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in MarloweStateAccountsInnerInner with oneOf schemas: List[MarloweStateAccountsInnerInnerOneOfInner], int. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in MarloweStateAccountsInnerInner with oneOf schemas: List[AccountTokenTupleInner], int. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -90,7 +90,7 @@ class MarloweStateAccountsInnerInner(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into List[MarloweStateAccountsInnerInnerOneOfInner]
+        # deserialize data into List[AccountTokenTupleInner]
         try:
             # validation
             instance.oneof_schema_1_validator = json.loads(json_str)
@@ -111,10 +111,10 @@ class MarloweStateAccountsInnerInner(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into MarloweStateAccountsInnerInner with oneOf schemas: List[MarloweStateAccountsInnerInnerOneOfInner], int. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into MarloweStateAccountsInnerInner with oneOf schemas: List[AccountTokenTupleInner], int. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into MarloweStateAccountsInnerInner with oneOf schemas: List[MarloweStateAccountsInnerInnerOneOfInner], int. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into MarloweStateAccountsInnerInner with oneOf schemas: List[AccountTokenTupleInner], int. Details: " + ", ".join(error_messages))
         else:
             return instance
 

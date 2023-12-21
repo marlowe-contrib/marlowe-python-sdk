@@ -20,23 +20,23 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.payee_object_one_of import PayeeObjectOneOf
-from openapi_client.models.payee_object_one_of1 import PayeeObjectOneOf1
+from openapi_client.models.pay_to_account_object import PayToAccountObject
+from openapi_client.models.pay_to_party_object import PayToPartyObject
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-PAYEEOBJECT_ONE_OF_SCHEMAS = ["PayeeObjectOneOf", "PayeeObjectOneOf1"]
+PAYEEOBJECT_ONE_OF_SCHEMAS = ["PayToAccountObject", "PayToPartyObject"]
 
 class PayeeObject(BaseModel):
     """
     A recipient of a payment
     """
-    # data type: PayeeObjectOneOf
-    oneof_schema_1_validator: Optional[PayeeObjectOneOf] = None
-    # data type: PayeeObjectOneOf1
-    oneof_schema_2_validator: Optional[PayeeObjectOneOf1] = None
+    # data type: PayToAccountObject
+    oneof_schema_1_validator: Optional[PayToAccountObject] = None
+    # data type: PayToPartyObject
+    oneof_schema_2_validator: Optional[PayToPartyObject] = None
     if TYPE_CHECKING:
-        actual_instance: Union[PayeeObjectOneOf, PayeeObjectOneOf1]
+        actual_instance: Union[PayToAccountObject, PayToPartyObject]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(PAYEEOBJECT_ONE_OF_SCHEMAS, const=True)
@@ -59,22 +59,22 @@ class PayeeObject(BaseModel):
         instance = PayeeObject.construct()
         error_messages = []
         match = 0
-        # validate data type: PayeeObjectOneOf
-        if not isinstance(v, PayeeObjectOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PayeeObjectOneOf`")
+        # validate data type: PayToAccountObject
+        if not isinstance(v, PayToAccountObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PayToAccountObject`")
         else:
             match += 1
-        # validate data type: PayeeObjectOneOf1
-        if not isinstance(v, PayeeObjectOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PayeeObjectOneOf1`")
+        # validate data type: PayToPartyObject
+        if not isinstance(v, PayToPartyObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PayToPartyObject`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in PayeeObject with oneOf schemas: PayeeObjectOneOf, PayeeObjectOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in PayeeObject with oneOf schemas: PayToAccountObject, PayToPartyObject. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in PayeeObject with oneOf schemas: PayeeObjectOneOf, PayeeObjectOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in PayeeObject with oneOf schemas: PayToAccountObject, PayToPartyObject. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -89,25 +89,25 @@ class PayeeObject(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into PayeeObjectOneOf
+        # deserialize data into PayToAccountObject
         try:
-            instance.actual_instance = PayeeObjectOneOf.from_json(json_str)
+            instance.actual_instance = PayToAccountObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into PayeeObjectOneOf1
+        # deserialize data into PayToPartyObject
         try:
-            instance.actual_instance = PayeeObjectOneOf1.from_json(json_str)
+            instance.actual_instance = PayToPartyObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into PayeeObject with oneOf schemas: PayeeObjectOneOf, PayeeObjectOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into PayeeObject with oneOf schemas: PayToAccountObject, PayToPartyObject. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into PayeeObject with oneOf schemas: PayeeObjectOneOf, PayeeObjectOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into PayeeObject with oneOf schemas: PayToAccountObject, PayToPartyObject. Details: " + ", ".join(error_messages))
         else:
             return instance
 

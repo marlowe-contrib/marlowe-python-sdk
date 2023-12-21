@@ -20,12 +20,12 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.action_object_one_of import ActionObjectOneOf
+from openapi_client.models.label_ref import LabelRef
 from openapi_client.models.token import Token
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-TOKENOBJECT_ONE_OF_SCHEMAS = ["ActionObjectOneOf", "Token"]
+TOKENOBJECT_ONE_OF_SCHEMAS = ["LabelRef", "Token"]
 
 class TokenObject(BaseModel):
     """
@@ -33,10 +33,10 @@ class TokenObject(BaseModel):
     """
     # data type: Token
     oneof_schema_1_validator: Optional[Token] = None
-    # data type: ActionObjectOneOf
-    oneof_schema_2_validator: Optional[ActionObjectOneOf] = None
+    # data type: LabelRef
+    oneof_schema_2_validator: Optional[LabelRef] = None
     if TYPE_CHECKING:
-        actual_instance: Union[ActionObjectOneOf, Token]
+        actual_instance: Union[LabelRef, Token]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(TOKENOBJECT_ONE_OF_SCHEMAS, const=True)
@@ -64,17 +64,17 @@ class TokenObject(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `Token`")
         else:
             match += 1
-        # validate data type: ActionObjectOneOf
-        if not isinstance(v, ActionObjectOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ActionObjectOneOf`")
+        # validate data type: LabelRef
+        if not isinstance(v, LabelRef):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `LabelRef`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TokenObject with oneOf schemas: ActionObjectOneOf, Token. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TokenObject with oneOf schemas: LabelRef, Token. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TokenObject with oneOf schemas: ActionObjectOneOf, Token. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TokenObject with oneOf schemas: LabelRef, Token. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -95,19 +95,19 @@ class TokenObject(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ActionObjectOneOf
+        # deserialize data into LabelRef
         try:
-            instance.actual_instance = ActionObjectOneOf.from_json(json_str)
+            instance.actual_instance = LabelRef.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TokenObject with oneOf schemas: ActionObjectOneOf, Token. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TokenObject with oneOf schemas: LabelRef, Token. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into TokenObject with oneOf schemas: ActionObjectOneOf, Token. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into TokenObject with oneOf schemas: LabelRef, Token. Details: " + ", ".join(error_messages))
         else:
             return instance
 

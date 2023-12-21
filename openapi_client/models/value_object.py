@@ -20,45 +20,46 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictInt, StrictStr, ValidationError, validator
-from openapi_client.models.action_object_one_of import ActionObjectOneOf
-from openapi_client.models.value_object_one_of import ValueObjectOneOf
-from openapi_client.models.value_object_one_of6 import ValueObjectOneOf6
-from openapi_client.models.value_one_of7 import ValueOneOf7
+from openapi_client.models.label_ref import LabelRef
+from openapi_client.models.time_interval import TimeInterval
+from openapi_client.models.token_in_account_object import TokenInAccountObject
+from openapi_client.models.use_value import UseValue
+from openapi_client.models.value_of_choice_object import ValueOfChoiceObject
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-VALUEOBJECT_ONE_OF_SCHEMAS = ["ActionObjectOneOf", "ValueObjectOneOf", "ValueObjectOneOf1", "ValueObjectOneOf2", "ValueObjectOneOf3", "ValueObjectOneOf4", "ValueObjectOneOf5", "ValueObjectOneOf6", "ValueObjectOneOf7", "ValueOneOf7", "int", "str"]
+VALUEOBJECT_ONE_OF_SCHEMAS = ["AddObject", "DivideObject", "IfValueObject", "LabelRef", "MinusObject", "MultiplyObject", "NegateObject", "TimeInterval", "TokenInAccountObject", "UseValue", "ValueOfChoiceObject", "int"]
 
 class ValueObject(BaseModel):
     """
     A time-varying expression that evaluates to a boolean
     """
-    # data type: ValueObjectOneOf
-    oneof_schema_1_validator: Optional[ValueObjectOneOf] = None
+    # data type: TokenInAccountObject
+    oneof_schema_1_validator: Optional[TokenInAccountObject] = None
     # data type: int
     oneof_schema_2_validator: Optional[StrictInt] = None
-    # data type: ValueObjectOneOf1
-    oneof_schema_3_validator: Optional[ValueObjectOneOf1] = None
-    # data type: ValueObjectOneOf2
-    oneof_schema_4_validator: Optional[ValueObjectOneOf2] = None
-    # data type: ValueObjectOneOf3
-    oneof_schema_5_validator: Optional[ValueObjectOneOf3] = None
-    # data type: ValueObjectOneOf4
-    oneof_schema_6_validator: Optional[ValueObjectOneOf4] = None
-    # data type: ValueObjectOneOf5
-    oneof_schema_7_validator: Optional[ValueObjectOneOf5] = None
-    # data type: ValueObjectOneOf6
-    oneof_schema_8_validator: Optional[ValueObjectOneOf6] = None
-    # data type: str
-    oneof_schema_9_validator: Optional[StrictStr] = None
-    # data type: ValueOneOf7
-    oneof_schema_10_validator: Optional[ValueOneOf7] = None
-    # data type: ValueObjectOneOf7
-    oneof_schema_11_validator: Optional[ValueObjectOneOf7] = None
-    # data type: ActionObjectOneOf
-    oneof_schema_12_validator: Optional[ActionObjectOneOf] = None
+    # data type: NegateObject
+    oneof_schema_3_validator: Optional[NegateObject] = None
+    # data type: AddObject
+    oneof_schema_4_validator: Optional[AddObject] = None
+    # data type: MinusObject
+    oneof_schema_5_validator: Optional[MinusObject] = None
+    # data type: MultiplyObject
+    oneof_schema_6_validator: Optional[MultiplyObject] = None
+    # data type: DivideObject
+    oneof_schema_7_validator: Optional[DivideObject] = None
+    # data type: ValueOfChoiceObject
+    oneof_schema_8_validator: Optional[ValueOfChoiceObject] = None
+    # data type: TimeInterval
+    oneof_schema_9_validator: Optional[TimeInterval] = None
+    # data type: UseValue
+    oneof_schema_10_validator: Optional[UseValue] = None
+    # data type: IfValueObject
+    oneof_schema_11_validator: Optional[IfValueObject] = None
+    # data type: LabelRef
+    oneof_schema_12_validator: Optional[LabelRef] = None
     if TYPE_CHECKING:
-        actual_instance: Union[ActionObjectOneOf, ValueObjectOneOf, ValueObjectOneOf1, ValueObjectOneOf2, ValueObjectOneOf3, ValueObjectOneOf4, ValueObjectOneOf5, ValueObjectOneOf6, ValueObjectOneOf7, ValueOneOf7, int, str]
+        actual_instance: Union[AddObject, DivideObject, IfValueObject, LabelRef, MinusObject, MultiplyObject, NegateObject, TimeInterval, TokenInAccountObject, UseValue, ValueOfChoiceObject, int]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(VALUEOBJECT_ONE_OF_SCHEMAS, const=True)
@@ -81,9 +82,9 @@ class ValueObject(BaseModel):
         instance = ValueObject.construct()
         error_messages = []
         match = 0
-        # validate data type: ValueObjectOneOf
-        if not isinstance(v, ValueObjectOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ValueObjectOneOf`")
+        # validate data type: TokenInAccountObject
+        if not isinstance(v, TokenInAccountObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TokenInAccountObject`")
         else:
             match += 1
         # validate data type: int
@@ -92,63 +93,62 @@ class ValueObject(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # validate data type: ValueObjectOneOf1
-        if not isinstance(v, ValueObjectOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ValueObjectOneOf1`")
+        # validate data type: NegateObject
+        if not isinstance(v, NegateObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `NegateObject`")
         else:
             match += 1
-        # validate data type: ValueObjectOneOf2
-        if not isinstance(v, ValueObjectOneOf2):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ValueObjectOneOf2`")
+        # validate data type: AddObject
+        if not isinstance(v, AddObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `AddObject`")
         else:
             match += 1
-        # validate data type: ValueObjectOneOf3
-        if not isinstance(v, ValueObjectOneOf3):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ValueObjectOneOf3`")
+        # validate data type: MinusObject
+        if not isinstance(v, MinusObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `MinusObject`")
         else:
             match += 1
-        # validate data type: ValueObjectOneOf4
-        if not isinstance(v, ValueObjectOneOf4):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ValueObjectOneOf4`")
+        # validate data type: MultiplyObject
+        if not isinstance(v, MultiplyObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `MultiplyObject`")
         else:
             match += 1
-        # validate data type: ValueObjectOneOf5
-        if not isinstance(v, ValueObjectOneOf5):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ValueObjectOneOf5`")
+        # validate data type: DivideObject
+        if not isinstance(v, DivideObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DivideObject`")
         else:
             match += 1
-        # validate data type: ValueObjectOneOf6
-        if not isinstance(v, ValueObjectOneOf6):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ValueObjectOneOf6`")
+        # validate data type: ValueOfChoiceObject
+        if not isinstance(v, ValueOfChoiceObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ValueOfChoiceObject`")
         else:
             match += 1
-        # validate data type: str
-        try:
-            instance.oneof_schema_9_validator = v
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # validate data type: ValueOneOf7
-        if not isinstance(v, ValueOneOf7):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ValueOneOf7`")
+        # validate data type: TimeInterval
+        if not isinstance(v, TimeInterval):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TimeInterval`")
         else:
             match += 1
-        # validate data type: ValueObjectOneOf7
-        if not isinstance(v, ValueObjectOneOf7):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ValueObjectOneOf7`")
+        # validate data type: UseValue
+        if not isinstance(v, UseValue):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `UseValue`")
         else:
             match += 1
-        # validate data type: ActionObjectOneOf
-        if not isinstance(v, ActionObjectOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ActionObjectOneOf`")
+        # validate data type: IfValueObject
+        if not isinstance(v, IfValueObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `IfValueObject`")
+        else:
+            match += 1
+        # validate data type: LabelRef
+        if not isinstance(v, LabelRef):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `LabelRef`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ValueObject with oneOf schemas: ActionObjectOneOf, ValueObjectOneOf, ValueObjectOneOf1, ValueObjectOneOf2, ValueObjectOneOf3, ValueObjectOneOf4, ValueObjectOneOf5, ValueObjectOneOf6, ValueObjectOneOf7, ValueOneOf7, int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ValueObject with oneOf schemas: AddObject, DivideObject, IfValueObject, LabelRef, MinusObject, MultiplyObject, NegateObject, TimeInterval, TokenInAccountObject, UseValue, ValueOfChoiceObject, int. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ValueObject with oneOf schemas: ActionObjectOneOf, ValueObjectOneOf, ValueObjectOneOf1, ValueObjectOneOf2, ValueObjectOneOf3, ValueObjectOneOf4, ValueObjectOneOf5, ValueObjectOneOf6, ValueObjectOneOf7, ValueOneOf7, int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ValueObject with oneOf schemas: AddObject, DivideObject, IfValueObject, LabelRef, MinusObject, MultiplyObject, NegateObject, TimeInterval, TokenInAccountObject, UseValue, ValueOfChoiceObject, int. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -163,9 +163,9 @@ class ValueObject(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into ValueObjectOneOf
+        # deserialize data into TokenInAccountObject
         try:
-            instance.actual_instance = ValueObjectOneOf.from_json(json_str)
+            instance.actual_instance = TokenInAccountObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -178,76 +178,73 @@ class ValueObject(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ValueObjectOneOf1
+        # deserialize data into NegateObject
         try:
-            instance.actual_instance = ValueObjectOneOf1.from_json(json_str)
+            instance.actual_instance = NegateObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ValueObjectOneOf2
+        # deserialize data into AddObject
         try:
-            instance.actual_instance = ValueObjectOneOf2.from_json(json_str)
+            instance.actual_instance = AddObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ValueObjectOneOf3
+        # deserialize data into MinusObject
         try:
-            instance.actual_instance = ValueObjectOneOf3.from_json(json_str)
+            instance.actual_instance = MinusObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ValueObjectOneOf4
+        # deserialize data into MultiplyObject
         try:
-            instance.actual_instance = ValueObjectOneOf4.from_json(json_str)
+            instance.actual_instance = MultiplyObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ValueObjectOneOf5
+        # deserialize data into DivideObject
         try:
-            instance.actual_instance = ValueObjectOneOf5.from_json(json_str)
+            instance.actual_instance = DivideObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ValueObjectOneOf6
+        # deserialize data into ValueOfChoiceObject
         try:
-            instance.actual_instance = ValueObjectOneOf6.from_json(json_str)
+            instance.actual_instance = ValueOfChoiceObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into str
+        # deserialize data into TimeInterval
         try:
-            # validation
-            instance.oneof_schema_9_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.oneof_schema_9_validator
+            instance.actual_instance = TimeInterval.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ValueOneOf7
+        # deserialize data into UseValue
         try:
-            instance.actual_instance = ValueOneOf7.from_json(json_str)
+            instance.actual_instance = UseValue.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ValueObjectOneOf7
+        # deserialize data into IfValueObject
         try:
-            instance.actual_instance = ValueObjectOneOf7.from_json(json_str)
+            instance.actual_instance = IfValueObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ActionObjectOneOf
+        # deserialize data into LabelRef
         try:
-            instance.actual_instance = ActionObjectOneOf.from_json(json_str)
+            instance.actual_instance = LabelRef.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ValueObject with oneOf schemas: ActionObjectOneOf, ValueObjectOneOf, ValueObjectOneOf1, ValueObjectOneOf2, ValueObjectOneOf3, ValueObjectOneOf4, ValueObjectOneOf5, ValueObjectOneOf6, ValueObjectOneOf7, ValueOneOf7, int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ValueObject with oneOf schemas: AddObject, DivideObject, IfValueObject, LabelRef, MinusObject, MultiplyObject, NegateObject, TimeInterval, TokenInAccountObject, UseValue, ValueOfChoiceObject, int. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ValueObject with oneOf schemas: ActionObjectOneOf, ValueObjectOneOf, ValueObjectOneOf1, ValueObjectOneOf2, ValueObjectOneOf3, ValueObjectOneOf4, ValueObjectOneOf5, ValueObjectOneOf6, ValueObjectOneOf7, ValueOneOf7, int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ValueObject with oneOf schemas: AddObject, DivideObject, IfValueObject, LabelRef, MinusObject, MultiplyObject, NegateObject, TimeInterval, TokenInAccountObject, UseValue, ValueOfChoiceObject, int. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -278,11 +275,11 @@ class ValueObject(BaseModel):
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.dict())
 
-from openapi_client.models.value_object_one_of1 import ValueObjectOneOf1
-from openapi_client.models.value_object_one_of2 import ValueObjectOneOf2
-from openapi_client.models.value_object_one_of3 import ValueObjectOneOf3
-from openapi_client.models.value_object_one_of4 import ValueObjectOneOf4
-from openapi_client.models.value_object_one_of5 import ValueObjectOneOf5
-from openapi_client.models.value_object_one_of7 import ValueObjectOneOf7
+from openapi_client.models.add_object import AddObject
+from openapi_client.models.divide_object import DivideObject
+from openapi_client.models.if_value_object import IfValueObject
+from openapi_client.models.minus_object import MinusObject
+from openapi_client.models.multiply_object import MultiplyObject
+from openapi_client.models.negate_object import NegateObject
 ValueObject.update_forward_refs()
 

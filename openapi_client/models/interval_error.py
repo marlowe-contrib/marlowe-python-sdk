@@ -20,23 +20,23 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.interval_error_one_of import IntervalErrorOneOf
-from openapi_client.models.interval_error_one_of1 import IntervalErrorOneOf1
+from openapi_client.models.interval_in_past import IntervalInPast
+from openapi_client.models.invalid_interval import InvalidInterval
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-INTERVALERROR_ONE_OF_SCHEMAS = ["IntervalErrorOneOf", "IntervalErrorOneOf1"]
+INTERVALERROR_ONE_OF_SCHEMAS = ["IntervalInPast", "InvalidInterval"]
 
 class IntervalError(BaseModel):
     """
     A Marlowe transaction interval error.
     """
-    # data type: IntervalErrorOneOf
-    oneof_schema_1_validator: Optional[IntervalErrorOneOf] = None
-    # data type: IntervalErrorOneOf1
-    oneof_schema_2_validator: Optional[IntervalErrorOneOf1] = None
+    # data type: InvalidInterval
+    oneof_schema_1_validator: Optional[InvalidInterval] = None
+    # data type: IntervalInPast
+    oneof_schema_2_validator: Optional[IntervalInPast] = None
     if TYPE_CHECKING:
-        actual_instance: Union[IntervalErrorOneOf, IntervalErrorOneOf1]
+        actual_instance: Union[IntervalInPast, InvalidInterval]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(INTERVALERROR_ONE_OF_SCHEMAS, const=True)
@@ -59,22 +59,22 @@ class IntervalError(BaseModel):
         instance = IntervalError.construct()
         error_messages = []
         match = 0
-        # validate data type: IntervalErrorOneOf
-        if not isinstance(v, IntervalErrorOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `IntervalErrorOneOf`")
+        # validate data type: InvalidInterval
+        if not isinstance(v, InvalidInterval):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `InvalidInterval`")
         else:
             match += 1
-        # validate data type: IntervalErrorOneOf1
-        if not isinstance(v, IntervalErrorOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `IntervalErrorOneOf1`")
+        # validate data type: IntervalInPast
+        if not isinstance(v, IntervalInPast):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `IntervalInPast`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in IntervalError with oneOf schemas: IntervalErrorOneOf, IntervalErrorOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in IntervalError with oneOf schemas: IntervalInPast, InvalidInterval. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in IntervalError with oneOf schemas: IntervalErrorOneOf, IntervalErrorOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in IntervalError with oneOf schemas: IntervalInPast, InvalidInterval. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -89,25 +89,25 @@ class IntervalError(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into IntervalErrorOneOf
+        # deserialize data into InvalidInterval
         try:
-            instance.actual_instance = IntervalErrorOneOf.from_json(json_str)
+            instance.actual_instance = InvalidInterval.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into IntervalErrorOneOf1
+        # deserialize data into IntervalInPast
         try:
-            instance.actual_instance = IntervalErrorOneOf1.from_json(json_str)
+            instance.actual_instance = IntervalInPast.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into IntervalError with oneOf schemas: IntervalErrorOneOf, IntervalErrorOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into IntervalError with oneOf schemas: IntervalInPast, InvalidInterval. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into IntervalError with oneOf schemas: IntervalErrorOneOf, IntervalErrorOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into IntervalError with oneOf schemas: IntervalInPast, InvalidInterval. Details: " + ", ".join(error_messages))
         else:
             return instance
 

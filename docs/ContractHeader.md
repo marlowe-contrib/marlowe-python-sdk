@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **block** | [**BlockHeader**](BlockHeader.md) |  | [optional] 
 **continuations** | **str** |  | [optional] 
 **contract_id** | **str** | A reference to a transaction output with a transaction ID and index. | 
-**metadata** | **Dict[str, object]** |  | 
+**metadata** | [**Dict[str, Metadata]**](Metadata.md) |  | 
 **role_token_minting_policy_id** | **str** | The hex-encoded minting policy ID for a native Cardano token | 
 **status** | [**TxStatus**](TxStatus.md) |  | 
-**tags** | **Dict[str, object]** |  | 
+**tags** | [**Dict[str, Metadata]**](Metadata.md) |  | 
 **version** | [**MarloweVersion**](MarloweVersion.md) |  | 
 
 ## Example

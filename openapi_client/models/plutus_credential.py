@@ -20,23 +20,23 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.plutus_credential_one_of import PlutusCredentialOneOf
-from openapi_client.models.plutus_credential_one_of1 import PlutusCredentialOneOf1
+from openapi_client.models.pub_key_credential import PubKeyCredential
+from openapi_client.models.script_credential import ScriptCredential
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-PLUTUSCREDENTIAL_ONE_OF_SCHEMAS = ["PlutusCredentialOneOf", "PlutusCredentialOneOf1"]
+PLUTUSCREDENTIAL_ONE_OF_SCHEMAS = ["PubKeyCredential", "ScriptCredential"]
 
 class PlutusCredential(BaseModel):
     """
     A Plutus credential.
     """
-    # data type: PlutusCredentialOneOf
-    oneof_schema_1_validator: Optional[PlutusCredentialOneOf] = None
-    # data type: PlutusCredentialOneOf1
-    oneof_schema_2_validator: Optional[PlutusCredentialOneOf1] = None
+    # data type: PubKeyCredential
+    oneof_schema_1_validator: Optional[PubKeyCredential] = None
+    # data type: ScriptCredential
+    oneof_schema_2_validator: Optional[ScriptCredential] = None
     if TYPE_CHECKING:
-        actual_instance: Union[PlutusCredentialOneOf, PlutusCredentialOneOf1]
+        actual_instance: Union[PubKeyCredential, ScriptCredential]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(PLUTUSCREDENTIAL_ONE_OF_SCHEMAS, const=True)
@@ -59,22 +59,22 @@ class PlutusCredential(BaseModel):
         instance = PlutusCredential.construct()
         error_messages = []
         match = 0
-        # validate data type: PlutusCredentialOneOf
-        if not isinstance(v, PlutusCredentialOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PlutusCredentialOneOf`")
+        # validate data type: PubKeyCredential
+        if not isinstance(v, PubKeyCredential):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PubKeyCredential`")
         else:
             match += 1
-        # validate data type: PlutusCredentialOneOf1
-        if not isinstance(v, PlutusCredentialOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PlutusCredentialOneOf1`")
+        # validate data type: ScriptCredential
+        if not isinstance(v, ScriptCredential):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ScriptCredential`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in PlutusCredential with oneOf schemas: PlutusCredentialOneOf, PlutusCredentialOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in PlutusCredential with oneOf schemas: PubKeyCredential, ScriptCredential. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in PlutusCredential with oneOf schemas: PlutusCredentialOneOf, PlutusCredentialOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in PlutusCredential with oneOf schemas: PubKeyCredential, ScriptCredential. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -89,25 +89,25 @@ class PlutusCredential(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into PlutusCredentialOneOf
+        # deserialize data into PubKeyCredential
         try:
-            instance.actual_instance = PlutusCredentialOneOf.from_json(json_str)
+            instance.actual_instance = PubKeyCredential.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into PlutusCredentialOneOf1
+        # deserialize data into ScriptCredential
         try:
-            instance.actual_instance = PlutusCredentialOneOf1.from_json(json_str)
+            instance.actual_instance = ScriptCredential.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into PlutusCredential with oneOf schemas: PlutusCredentialOneOf, PlutusCredentialOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into PlutusCredential with oneOf schemas: PubKeyCredential, ScriptCredential. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into PlutusCredential with oneOf schemas: PlutusCredentialOneOf, PlutusCredentialOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into PlutusCredential with oneOf schemas: PubKeyCredential, ScriptCredential. Details: " + ", ".join(error_messages))
         else:
             return instance
 

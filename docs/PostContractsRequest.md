@@ -5,10 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **contract** | [**PostContractsRequestContract**](PostContractsRequestContract.md) |  | 
-**metadata** | **Dict[str, object]** |  | 
+**metadata** | [**Dict[str, Metadata]**](Metadata.md) |  | 
 **min_utx_o_deposit** | **int** |  | [optional] 
 **roles** | [**RolesConfig**](RolesConfig.md) |  | [optional] 
-**tags** | **Dict[str, object]** |  | 
+**tags** | [**Dict[str, Metadata]**](Metadata.md) |  | 
+**thread_token_name** | **str** |  | [optional] 
 **version** | [**MarloweVersion**](MarloweVersion.md) |  | 
 
 ## Example

@@ -20,26 +20,26 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.action_one_of import ActionOneOf
-from openapi_client.models.action_one_of1 import ActionOneOf1
-from openapi_client.models.action_one_of2 import ActionOneOf2
+from openapi_client.models.choice_action import ChoiceAction
+from openapi_client.models.deposit_action import DepositAction
+from openapi_client.models.notify_action import NotifyAction
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-ACTION_ONE_OF_SCHEMAS = ["ActionOneOf", "ActionOneOf1", "ActionOneOf2"]
+ACTION_ONE_OF_SCHEMAS = ["ChoiceAction", "DepositAction", "NotifyAction"]
 
 class Action(BaseModel):
     """
     A contract which becomes active when an action occurs.
     """
-    # data type: ActionOneOf
-    oneof_schema_1_validator: Optional[ActionOneOf] = None
-    # data type: ActionOneOf1
-    oneof_schema_2_validator: Optional[ActionOneOf1] = None
-    # data type: ActionOneOf2
-    oneof_schema_3_validator: Optional[ActionOneOf2] = None
+    # data type: DepositAction
+    oneof_schema_1_validator: Optional[DepositAction] = None
+    # data type: ChoiceAction
+    oneof_schema_2_validator: Optional[ChoiceAction] = None
+    # data type: NotifyAction
+    oneof_schema_3_validator: Optional[NotifyAction] = None
     if TYPE_CHECKING:
-        actual_instance: Union[ActionOneOf, ActionOneOf1, ActionOneOf2]
+        actual_instance: Union[ChoiceAction, DepositAction, NotifyAction]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(ACTION_ONE_OF_SCHEMAS, const=True)
@@ -62,27 +62,27 @@ class Action(BaseModel):
         instance = Action.construct()
         error_messages = []
         match = 0
-        # validate data type: ActionOneOf
-        if not isinstance(v, ActionOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ActionOneOf`")
+        # validate data type: DepositAction
+        if not isinstance(v, DepositAction):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DepositAction`")
         else:
             match += 1
-        # validate data type: ActionOneOf1
-        if not isinstance(v, ActionOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ActionOneOf1`")
+        # validate data type: ChoiceAction
+        if not isinstance(v, ChoiceAction):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ChoiceAction`")
         else:
             match += 1
-        # validate data type: ActionOneOf2
-        if not isinstance(v, ActionOneOf2):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ActionOneOf2`")
+        # validate data type: NotifyAction
+        if not isinstance(v, NotifyAction):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `NotifyAction`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in Action with oneOf schemas: ActionOneOf, ActionOneOf1, ActionOneOf2. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in Action with oneOf schemas: ChoiceAction, DepositAction, NotifyAction. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in Action with oneOf schemas: ActionOneOf, ActionOneOf1, ActionOneOf2. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in Action with oneOf schemas: ChoiceAction, DepositAction, NotifyAction. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -97,31 +97,31 @@ class Action(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into ActionOneOf
+        # deserialize data into DepositAction
         try:
-            instance.actual_instance = ActionOneOf.from_json(json_str)
+            instance.actual_instance = DepositAction.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ActionOneOf1
+        # deserialize data into ChoiceAction
         try:
-            instance.actual_instance = ActionOneOf1.from_json(json_str)
+            instance.actual_instance = ChoiceAction.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ActionOneOf2
+        # deserialize data into NotifyAction
         try:
-            instance.actual_instance = ActionOneOf2.from_json(json_str)
+            instance.actual_instance = NotifyAction.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into Action with oneOf schemas: ActionOneOf, ActionOneOf1, ActionOneOf2. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into Action with oneOf schemas: ChoiceAction, DepositAction, NotifyAction. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into Action with oneOf schemas: ActionOneOf, ActionOneOf1, ActionOneOf2. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into Action with oneOf schemas: ChoiceAction, DepositAction, NotifyAction. Details: " + ", ".join(error_messages))
         else:
             return instance
 

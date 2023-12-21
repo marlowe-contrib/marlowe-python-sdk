@@ -20,6 +20,7 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, constr, validator
+from openapi_client.models.close import Close
 from openapi_client.models.contract import Contract
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
@@ -34,6 +35,13 @@ class PostContractsRequestContract(BaseModel):
     oneof_schema_1_validator: Optional[Contract] = None
     # data type: str
     oneof_schema_2_validator: Optional[constr(strict=True)] = Field(None, description="The hex-encoded identifier of a Marlowe contract source")
+    # go with validator one when string equals the close enum
+    @validator('oneof_schema_2_validator')
+    def oneof_schema_2_validator_must_validate_oneof(cls, v):
+        if v == Close.CLOSE:
+            raise ValueError("This shouldn't be used to parse a Close enum")
+        return v
+    
     if TYPE_CHECKING:
         actual_instance: Union[Contract, str]
     else:

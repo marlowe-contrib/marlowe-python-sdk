@@ -18,10 +18,11 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist
 from openapi_client.models.input import Input
 from openapi_client.models.marlowe_version import MarloweVersion
+from openapi_client.models.metadata import Metadata
 
 class PostTransactionsRequest(BaseModel):
     """
@@ -30,8 +31,8 @@ class PostTransactionsRequest(BaseModel):
     inputs: conlist(Input) = Field(...)
     invalid_before: Optional[StrictStr] = Field(None, alias="invalidBefore")
     invalid_hereafter: Optional[StrictStr] = Field(None, alias="invalidHereafter")
-    metadata: Dict[str, Any] = Field(...)
-    tags: Dict[str, Any] = Field(...)
+    metadata: Dict[str, Metadata] = Field(...)
+    tags: Dict[str, Metadata] = Field(...)
     version: MarloweVersion = Field(...)
     __properties = ["inputs", "invalidBefore", "invalidHereafter", "metadata", "tags", "version"]
 
@@ -66,6 +67,20 @@ class PostTransactionsRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['inputs'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key in self.metadata:
+                if self.metadata[_key]:
+                    _field_dict[_key] = self.metadata[_key].to_dict()
+            _dict['metadata'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in tags (dict)
+        _field_dict = {}
+        if self.tags:
+            for _key in self.tags:
+                if self.tags[_key]:
+                    _field_dict[_key] = self.tags[_key].to_dict()
+            _dict['tags'] = _field_dict
         return _dict
 
     @classmethod
@@ -81,8 +96,18 @@ class PostTransactionsRequest(BaseModel):
             "inputs": [Input.from_dict(_item) for _item in obj.get("inputs")] if obj.get("inputs") is not None else None,
             "invalid_before": obj.get("invalidBefore"),
             "invalid_hereafter": obj.get("invalidHereafter"),
-            "metadata": obj.get("metadata"),
-            "tags": obj.get("tags"),
+            "metadata": dict(
+                (_k, Metadata.from_dict(_v))
+                for _k, _v in obj.get("metadata").items()
+            )
+            if obj.get("metadata") is not None
+            else None,
+            "tags": dict(
+                (_k, Metadata.from_dict(_v))
+                for _k, _v in obj.get("tags").items()
+            )
+            if obj.get("tags") is not None
+            else None,
             "version": obj.get("version")
         })
         return _obj

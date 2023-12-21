@@ -20,22 +20,22 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.case_object_one_of1 import CaseObjectOneOf1
+from openapi_client.models.case_merkleized_then_object import CaseMerkleizedThenObject
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-CASEOBJECT_ONE_OF_SCHEMAS = ["CaseObjectOneOf", "CaseObjectOneOf1"]
+CASEOBJECT_ONE_OF_SCHEMAS = ["CaseMerkleizedThenObject", "CaseThenObject"]
 
 class CaseObject(BaseModel):
     """
     A contract which becomes active when an action occurs.
     """
-    # data type: CaseObjectOneOf
-    oneof_schema_1_validator: Optional[CaseObjectOneOf] = None
-    # data type: CaseObjectOneOf1
-    oneof_schema_2_validator: Optional[CaseObjectOneOf1] = None
+    # data type: CaseThenObject
+    oneof_schema_1_validator: Optional[CaseThenObject] = None
+    # data type: CaseMerkleizedThenObject
+    oneof_schema_2_validator: Optional[CaseMerkleizedThenObject] = None
     if TYPE_CHECKING:
-        actual_instance: Union[CaseObjectOneOf, CaseObjectOneOf1]
+        actual_instance: Union[CaseMerkleizedThenObject, CaseThenObject]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(CASEOBJECT_ONE_OF_SCHEMAS, const=True)
@@ -58,22 +58,22 @@ class CaseObject(BaseModel):
         instance = CaseObject.construct()
         error_messages = []
         match = 0
-        # validate data type: CaseObjectOneOf
-        if not isinstance(v, CaseObjectOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `CaseObjectOneOf`")
+        # validate data type: CaseThenObject
+        if not isinstance(v, CaseThenObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CaseThenObject`")
         else:
             match += 1
-        # validate data type: CaseObjectOneOf1
-        if not isinstance(v, CaseObjectOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `CaseObjectOneOf1`")
+        # validate data type: CaseMerkleizedThenObject
+        if not isinstance(v, CaseMerkleizedThenObject):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CaseMerkleizedThenObject`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in CaseObject with oneOf schemas: CaseObjectOneOf, CaseObjectOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in CaseObject with oneOf schemas: CaseMerkleizedThenObject, CaseThenObject. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in CaseObject with oneOf schemas: CaseObjectOneOf, CaseObjectOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in CaseObject with oneOf schemas: CaseMerkleizedThenObject, CaseThenObject. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -88,25 +88,25 @@ class CaseObject(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into CaseObjectOneOf
+        # deserialize data into CaseThenObject
         try:
-            instance.actual_instance = CaseObjectOneOf.from_json(json_str)
+            instance.actual_instance = CaseThenObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into CaseObjectOneOf1
+        # deserialize data into CaseMerkleizedThenObject
         try:
-            instance.actual_instance = CaseObjectOneOf1.from_json(json_str)
+            instance.actual_instance = CaseMerkleizedThenObject.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into CaseObject with oneOf schemas: CaseObjectOneOf, CaseObjectOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into CaseObject with oneOf schemas: CaseMerkleizedThenObject, CaseThenObject. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into CaseObject with oneOf schemas: CaseObjectOneOf, CaseObjectOneOf1. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into CaseObject with oneOf schemas: CaseMerkleizedThenObject, CaseThenObject. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -137,6 +137,6 @@ class CaseObject(BaseModel):
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.dict())
 
-from openapi_client.models.case_object_one_of import CaseObjectOneOf
+from openapi_client.models.case_then_object import CaseThenObject
 CaseObject.update_forward_refs()
 

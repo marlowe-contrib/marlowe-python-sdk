@@ -18,9 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
+from typing import Dict, Optional
 from pydantic import BaseModel, Field, StrictStr, constr, validator
 from openapi_client.models.block_header import BlockHeader
+from openapi_client.models.metadata import Metadata
 from openapi_client.models.tx_status import TxStatus
 
 class TxHeader(BaseModel):
@@ -30,9 +31,9 @@ class TxHeader(BaseModel):
     block: Optional[BlockHeader] = None
     continuations: Optional[StrictStr] = None
     contract_id: constr(strict=True) = Field(..., alias="contractId", description="A reference to a transaction output with a transaction ID and index.")
-    metadata: Dict[str, Any] = Field(...)
+    metadata: Dict[str, Metadata] = Field(...)
     status: TxStatus = Field(...)
-    tags: Dict[str, Any] = Field(...)
+    tags: Dict[str, Metadata] = Field(...)
     transaction_id: constr(strict=True) = Field(..., alias="transactionId", description="The hex-encoded identifier of a Cardano transaction")
     utxo: Optional[constr(strict=True)] = Field(None, description="A reference to a transaction output with a transaction ID and index.")
     __properties = ["block", "continuations", "contractId", "metadata", "status", "tags", "transactionId", "utxo"]
@@ -88,6 +89,20 @@ class TxHeader(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of block
         if self.block:
             _dict['block'] = self.block.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key in self.metadata:
+                if self.metadata[_key]:
+                    _field_dict[_key] = self.metadata[_key].to_dict()
+            _dict['metadata'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in tags (dict)
+        _field_dict = {}
+        if self.tags:
+            for _key in self.tags:
+                if self.tags[_key]:
+                    _field_dict[_key] = self.tags[_key].to_dict()
+            _dict['tags'] = _field_dict
         return _dict
 
     @classmethod
@@ -103,9 +118,19 @@ class TxHeader(BaseModel):
             "block": BlockHeader.from_dict(obj.get("block")) if obj.get("block") is not None else None,
             "continuations": obj.get("continuations"),
             "contract_id": obj.get("contractId"),
-            "metadata": obj.get("metadata"),
+            "metadata": dict(
+                (_k, Metadata.from_dict(_v))
+                for _k, _v in obj.get("metadata").items()
+            )
+            if obj.get("metadata") is not None
+            else None,
             "status": obj.get("status"),
-            "tags": obj.get("tags"),
+            "tags": dict(
+                (_k, Metadata.from_dict(_v))
+                for _k, _v in obj.get("tags").items()
+            )
+            if obj.get("tags") is not None
+            else None,
             "transaction_id": obj.get("transactionId"),
             "utxo": obj.get("utxo")
         })

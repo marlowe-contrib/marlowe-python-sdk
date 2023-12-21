@@ -20,12 +20,13 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.role_token_config_one_of import RoleTokenConfigOneOf
-from openapi_client.models.role_token_config_one_of1 import RoleTokenConfigOneOf1
+from openapi_client.models.address_and_metadata import AddressAndMetadata
+from openapi_client.models.metadata_and_recipients import MetadataAndRecipients
+from openapi_client.models.metadata_and_script import MetadataAndScript
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-ROLETOKENCONFIG_ONE_OF_SCHEMAS = ["RoleTokenConfigOneOf", "RoleTokenConfigOneOf1", "str"]
+ROLETOKENCONFIG_ONE_OF_SCHEMAS = ["AddressAndMetadata", "MetadataAndRecipients", "MetadataAndScript", "str"]
 
 class RoleTokenConfig(BaseModel):
     """
@@ -33,12 +34,14 @@ class RoleTokenConfig(BaseModel):
     """
     # data type: str
     oneof_schema_1_validator: Optional[StrictStr] = Field(None, description="A cardano address, in Bech32 format")
-    # data type: RoleTokenConfigOneOf
-    oneof_schema_2_validator: Optional[RoleTokenConfigOneOf] = None
-    # data type: RoleTokenConfigOneOf1
-    oneof_schema_3_validator: Optional[RoleTokenConfigOneOf1] = None
+    # data type: AddressAndMetadata
+    oneof_schema_2_validator: Optional[AddressAndMetadata] = None
+    # data type: MetadataAndScript
+    oneof_schema_3_validator: Optional[MetadataAndScript] = None
+    # data type: MetadataAndRecipients
+    oneof_schema_4_validator: Optional[MetadataAndRecipients] = None
     if TYPE_CHECKING:
-        actual_instance: Union[RoleTokenConfigOneOf, RoleTokenConfigOneOf1, str]
+        actual_instance: Union[AddressAndMetadata, MetadataAndRecipients, MetadataAndScript, str]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(ROLETOKENCONFIG_ONE_OF_SCHEMAS, const=True)
@@ -67,22 +70,27 @@ class RoleTokenConfig(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # validate data type: RoleTokenConfigOneOf
-        if not isinstance(v, RoleTokenConfigOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `RoleTokenConfigOneOf`")
+        # validate data type: AddressAndMetadata
+        if not isinstance(v, AddressAndMetadata):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `AddressAndMetadata`")
         else:
             match += 1
-        # validate data type: RoleTokenConfigOneOf1
-        if not isinstance(v, RoleTokenConfigOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `RoleTokenConfigOneOf1`")
+        # validate data type: MetadataAndScript
+        if not isinstance(v, MetadataAndScript):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `MetadataAndScript`")
+        else:
+            match += 1
+        # validate data type: MetadataAndRecipients
+        if not isinstance(v, MetadataAndRecipients):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `MetadataAndRecipients`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in RoleTokenConfig with oneOf schemas: RoleTokenConfigOneOf, RoleTokenConfigOneOf1, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in RoleTokenConfig with oneOf schemas: AddressAndMetadata, MetadataAndRecipients, MetadataAndScript, str. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in RoleTokenConfig with oneOf schemas: RoleTokenConfigOneOf, RoleTokenConfigOneOf1, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in RoleTokenConfig with oneOf schemas: AddressAndMetadata, MetadataAndRecipients, MetadataAndScript, str. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -106,25 +114,31 @@ class RoleTokenConfig(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into RoleTokenConfigOneOf
+        # deserialize data into AddressAndMetadata
         try:
-            instance.actual_instance = RoleTokenConfigOneOf.from_json(json_str)
+            instance.actual_instance = AddressAndMetadata.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into RoleTokenConfigOneOf1
+        # deserialize data into MetadataAndScript
         try:
-            instance.actual_instance = RoleTokenConfigOneOf1.from_json(json_str)
+            instance.actual_instance = MetadataAndScript.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into MetadataAndRecipients
+        try:
+            instance.actual_instance = MetadataAndRecipients.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into RoleTokenConfig with oneOf schemas: RoleTokenConfigOneOf, RoleTokenConfigOneOf1, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into RoleTokenConfig with oneOf schemas: AddressAndMetadata, MetadataAndRecipients, MetadataAndScript, str. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into RoleTokenConfig with oneOf schemas: RoleTokenConfigOneOf, RoleTokenConfigOneOf1, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into RoleTokenConfig with oneOf schemas: AddressAndMetadata, MetadataAndRecipients, MetadataAndScript, str. Details: " + ", ".join(error_messages))
         else:
             return instance
 
