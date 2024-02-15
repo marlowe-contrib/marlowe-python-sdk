@@ -20,31 +20,32 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.transaction_warning_one_of import TransactionWarningOneOf
-from openapi_client.models.transaction_warning_one_of1 import TransactionWarningOneOf1
-from openapi_client.models.transaction_warning_one_of2 import TransactionWarningOneOf2
-from openapi_client.models.transaction_warning_one_of3 import TransactionWarningOneOf3
+from openapi_client.models.assert_fail import AssertFail
+from openapi_client.models.non_positive_deposit import NonPositiveDeposit
+from openapi_client.models.non_positive_payment import NonPositivePayment
+from openapi_client.models.partial_payment import PartialPayment
+from openapi_client.models.variable_shadowing import VariableShadowing
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-TRANSACTIONWARNING_ONE_OF_SCHEMAS = ["TransactionWarningOneOf", "TransactionWarningOneOf1", "TransactionWarningOneOf2", "TransactionWarningOneOf3", "str"]
+TRANSACTIONWARNING_ONE_OF_SCHEMAS = ["AssertFail", "NonPositiveDeposit", "NonPositivePayment", "PartialPayment", "VariableShadowing"]
 
 class TransactionWarning(BaseModel):
     """
     A transaction semantics warning.
     """
-    # data type: TransactionWarningOneOf
-    oneof_schema_1_validator: Optional[TransactionWarningOneOf] = None
-    # data type: TransactionWarningOneOf1
-    oneof_schema_2_validator: Optional[TransactionWarningOneOf1] = None
-    # data type: TransactionWarningOneOf2
-    oneof_schema_3_validator: Optional[TransactionWarningOneOf2] = None
-    # data type: TransactionWarningOneOf3
-    oneof_schema_4_validator: Optional[TransactionWarningOneOf3] = None
-    # data type: str
-    oneof_schema_5_validator: Optional[StrictStr] = Field(None, description="A semantics assertion failed.")
+    # data type: NonPositiveDeposit
+    oneof_schema_1_validator: Optional[NonPositiveDeposit] = None
+    # data type: NonPositivePayment
+    oneof_schema_2_validator: Optional[NonPositivePayment] = None
+    # data type: PartialPayment
+    oneof_schema_3_validator: Optional[PartialPayment] = None
+    # data type: VariableShadowing
+    oneof_schema_4_validator: Optional[VariableShadowing] = None
+    # data type: AssertFail
+    oneof_schema_5_validator: Optional[AssertFail] = None
     if TYPE_CHECKING:
-        actual_instance: Union[TransactionWarningOneOf, TransactionWarningOneOf1, TransactionWarningOneOf2, TransactionWarningOneOf3, str]
+        actual_instance: Union[AssertFail, NonPositiveDeposit, NonPositivePayment, PartialPayment, VariableShadowing]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(TRANSACTIONWARNING_ONE_OF_SCHEMAS, const=True)
@@ -67,38 +68,37 @@ class TransactionWarning(BaseModel):
         instance = TransactionWarning.construct()
         error_messages = []
         match = 0
-        # validate data type: TransactionWarningOneOf
-        if not isinstance(v, TransactionWarningOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionWarningOneOf`")
+        # validate data type: NonPositiveDeposit
+        if not isinstance(v, NonPositiveDeposit):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `NonPositiveDeposit`")
         else:
             match += 1
-        # validate data type: TransactionWarningOneOf1
-        if not isinstance(v, TransactionWarningOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionWarningOneOf1`")
+        # validate data type: NonPositivePayment
+        if not isinstance(v, NonPositivePayment):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `NonPositivePayment`")
         else:
             match += 1
-        # validate data type: TransactionWarningOneOf2
-        if not isinstance(v, TransactionWarningOneOf2):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionWarningOneOf2`")
+        # validate data type: PartialPayment
+        if not isinstance(v, PartialPayment):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PartialPayment`")
         else:
             match += 1
-        # validate data type: TransactionWarningOneOf3
-        if not isinstance(v, TransactionWarningOneOf3):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionWarningOneOf3`")
+        # validate data type: VariableShadowing
+        if not isinstance(v, VariableShadowing):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `VariableShadowing`")
         else:
             match += 1
-        # validate data type: str
-        try:
-            instance.oneof_schema_5_validator = v
+        # validate data type: AssertFail
+        if not isinstance(v, AssertFail):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `AssertFail`")
+        else:
             match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionWarning with oneOf schemas: TransactionWarningOneOf, TransactionWarningOneOf1, TransactionWarningOneOf2, TransactionWarningOneOf3, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionWarning with oneOf schemas: AssertFail, NonPositiveDeposit, NonPositivePayment, PartialPayment, VariableShadowing. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TransactionWarning with oneOf schemas: TransactionWarningOneOf, TransactionWarningOneOf1, TransactionWarningOneOf2, TransactionWarningOneOf3, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TransactionWarning with oneOf schemas: AssertFail, NonPositiveDeposit, NonPositivePayment, PartialPayment, VariableShadowing. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -113,46 +113,43 @@ class TransactionWarning(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into TransactionWarningOneOf
+        # deserialize data into NonPositiveDeposit
         try:
-            instance.actual_instance = TransactionWarningOneOf.from_json(json_str)
+            instance.actual_instance = NonPositiveDeposit.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into TransactionWarningOneOf1
+        # deserialize data into NonPositivePayment
         try:
-            instance.actual_instance = TransactionWarningOneOf1.from_json(json_str)
+            instance.actual_instance = NonPositivePayment.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into TransactionWarningOneOf2
+        # deserialize data into PartialPayment
         try:
-            instance.actual_instance = TransactionWarningOneOf2.from_json(json_str)
+            instance.actual_instance = PartialPayment.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into TransactionWarningOneOf3
+        # deserialize data into VariableShadowing
         try:
-            instance.actual_instance = TransactionWarningOneOf3.from_json(json_str)
+            instance.actual_instance = VariableShadowing.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into str
+        # deserialize data into AssertFail
         try:
-            # validation
-            instance.oneof_schema_5_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.oneof_schema_5_validator
+            instance.actual_instance = AssertFail.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionWarning with oneOf schemas: TransactionWarningOneOf, TransactionWarningOneOf1, TransactionWarningOneOf2, TransactionWarningOneOf3, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionWarning with oneOf schemas: AssertFail, NonPositiveDeposit, NonPositivePayment, PartialPayment, VariableShadowing. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into TransactionWarning with oneOf schemas: TransactionWarningOneOf, TransactionWarningOneOf1, TransactionWarningOneOf2, TransactionWarningOneOf3, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into TransactionWarning with oneOf schemas: AssertFail, NonPositiveDeposit, NonPositivePayment, PartialPayment, VariableShadowing. Details: " + ", ".join(error_messages))
         else:
             return instance
 

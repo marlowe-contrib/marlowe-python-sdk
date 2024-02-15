@@ -5,8 +5,8 @@ A Marlowe transaction interval error.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**invalid_interval** | [**IntervalErrorOneOfInvalidInterval**](IntervalErrorOneOfInvalidInterval.md) |  | 
-**interval_in_past_error** | [**IntervalErrorOneOf1IntervalInPastError**](IntervalErrorOneOf1IntervalInPastError.md) |  | 
+**invalid_interval** | [**InvalidIntervalInvalidInterval**](InvalidIntervalInvalidInterval.md) |  | 
+**interval_in_past_error** | [**IntervalInPastIntervalInPastError**](IntervalInPastIntervalInPastError.md) |  | 
 
 ## Example
 

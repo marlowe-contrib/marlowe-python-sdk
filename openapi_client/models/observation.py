@@ -20,11 +20,11 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictBool, StrictStr, ValidationError, validator
-from openapi_client.models.observation_one_of3 import ObservationOneOf3
+from openapi_client.models.choose_for import ChooseFor
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-OBSERVATION_ONE_OF_SCHEMAS = ["ObservationOneOf", "ObservationOneOf1", "ObservationOneOf2", "ObservationOneOf3", "ObservationOneOf4", "ObservationOneOf5", "ObservationOneOf6", "ObservationOneOf7", "ObservationOneOf8", "bool"]
+OBSERVATION_ONE_OF_SCHEMAS = ["ChooseFor", "Equal", "Greater", "GreaterOrEqual", "Lesser", "LesserOrEqual", "ModelAnd", "ModelNot", "ModelOr", "bool"]
 
 class Observation(BaseModel):
     """
@@ -32,26 +32,26 @@ class Observation(BaseModel):
     """
     # data type: bool
     oneof_schema_1_validator: Optional[StrictBool] = None
-    # data type: ObservationOneOf
-    oneof_schema_2_validator: Optional[ObservationOneOf] = None
-    # data type: ObservationOneOf1
-    oneof_schema_3_validator: Optional[ObservationOneOf1] = None
-    # data type: ObservationOneOf2
-    oneof_schema_4_validator: Optional[ObservationOneOf2] = None
-    # data type: ObservationOneOf3
-    oneof_schema_5_validator: Optional[ObservationOneOf3] = None
-    # data type: ObservationOneOf4
-    oneof_schema_6_validator: Optional[ObservationOneOf4] = None
-    # data type: ObservationOneOf5
-    oneof_schema_7_validator: Optional[ObservationOneOf5] = None
-    # data type: ObservationOneOf6
-    oneof_schema_8_validator: Optional[ObservationOneOf6] = None
-    # data type: ObservationOneOf7
-    oneof_schema_9_validator: Optional[ObservationOneOf7] = None
-    # data type: ObservationOneOf8
-    oneof_schema_10_validator: Optional[ObservationOneOf8] = None
+    # data type: ModelAnd
+    oneof_schema_2_validator: Optional[ModelAnd] = None
+    # data type: ModelOr
+    oneof_schema_3_validator: Optional[ModelOr] = None
+    # data type: ModelNot
+    oneof_schema_4_validator: Optional[ModelNot] = None
+    # data type: ChooseFor
+    oneof_schema_5_validator: Optional[ChooseFor] = None
+    # data type: GreaterOrEqual
+    oneof_schema_6_validator: Optional[GreaterOrEqual] = None
+    # data type: Greater
+    oneof_schema_7_validator: Optional[Greater] = None
+    # data type: Lesser
+    oneof_schema_8_validator: Optional[Lesser] = None
+    # data type: LesserOrEqual
+    oneof_schema_9_validator: Optional[LesserOrEqual] = None
+    # data type: Equal
+    oneof_schema_10_validator: Optional[Equal] = None
     if TYPE_CHECKING:
-        actual_instance: Union[ObservationOneOf, ObservationOneOf1, ObservationOneOf2, ObservationOneOf3, ObservationOneOf4, ObservationOneOf5, ObservationOneOf6, ObservationOneOf7, ObservationOneOf8, bool]
+        actual_instance: Union[ChooseFor, Equal, Greater, GreaterOrEqual, Lesser, LesserOrEqual, ModelAnd, ModelNot, ModelOr, bool]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(OBSERVATION_ONE_OF_SCHEMAS, const=True)
@@ -80,57 +80,57 @@ class Observation(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # validate data type: ObservationOneOf
-        if not isinstance(v, ObservationOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationOneOf`")
+        # validate data type: ModelAnd
+        if not isinstance(v, ModelAnd):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ModelAnd`")
         else:
             match += 1
-        # validate data type: ObservationOneOf1
-        if not isinstance(v, ObservationOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationOneOf1`")
+        # validate data type: ModelOr
+        if not isinstance(v, ModelOr):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ModelOr`")
         else:
             match += 1
-        # validate data type: ObservationOneOf2
-        if not isinstance(v, ObservationOneOf2):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationOneOf2`")
+        # validate data type: ModelNot
+        if not isinstance(v, ModelNot):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ModelNot`")
         else:
             match += 1
-        # validate data type: ObservationOneOf3
-        if not isinstance(v, ObservationOneOf3):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationOneOf3`")
+        # validate data type: ChooseFor
+        if not isinstance(v, ChooseFor):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ChooseFor`")
         else:
             match += 1
-        # validate data type: ObservationOneOf4
-        if not isinstance(v, ObservationOneOf4):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationOneOf4`")
+        # validate data type: GreaterOrEqual
+        if not isinstance(v, GreaterOrEqual):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `GreaterOrEqual`")
         else:
             match += 1
-        # validate data type: ObservationOneOf5
-        if not isinstance(v, ObservationOneOf5):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationOneOf5`")
+        # validate data type: Greater
+        if not isinstance(v, Greater):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `Greater`")
         else:
             match += 1
-        # validate data type: ObservationOneOf6
-        if not isinstance(v, ObservationOneOf6):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationOneOf6`")
+        # validate data type: Lesser
+        if not isinstance(v, Lesser):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `Lesser`")
         else:
             match += 1
-        # validate data type: ObservationOneOf7
-        if not isinstance(v, ObservationOneOf7):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationOneOf7`")
+        # validate data type: LesserOrEqual
+        if not isinstance(v, LesserOrEqual):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `LesserOrEqual`")
         else:
             match += 1
-        # validate data type: ObservationOneOf8
-        if not isinstance(v, ObservationOneOf8):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ObservationOneOf8`")
+        # validate data type: Equal
+        if not isinstance(v, Equal):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `Equal`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in Observation with oneOf schemas: ObservationOneOf, ObservationOneOf1, ObservationOneOf2, ObservationOneOf3, ObservationOneOf4, ObservationOneOf5, ObservationOneOf6, ObservationOneOf7, ObservationOneOf8, bool. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in Observation with oneOf schemas: ChooseFor, Equal, Greater, GreaterOrEqual, Lesser, LesserOrEqual, ModelAnd, ModelNot, ModelOr, bool. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in Observation with oneOf schemas: ObservationOneOf, ObservationOneOf1, ObservationOneOf2, ObservationOneOf3, ObservationOneOf4, ObservationOneOf5, ObservationOneOf6, ObservationOneOf7, ObservationOneOf8, bool. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in Observation with oneOf schemas: ChooseFor, Equal, Greater, GreaterOrEqual, Lesser, LesserOrEqual, ModelAnd, ModelNot, ModelOr, bool. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -154,67 +154,67 @@ class Observation(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationOneOf
+        # deserialize data into ModelAnd
         try:
-            instance.actual_instance = ObservationOneOf.from_json(json_str)
+            instance.actual_instance = ModelAnd.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationOneOf1
+        # deserialize data into ModelOr
         try:
-            instance.actual_instance = ObservationOneOf1.from_json(json_str)
+            instance.actual_instance = ModelOr.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationOneOf2
+        # deserialize data into ModelNot
         try:
-            instance.actual_instance = ObservationOneOf2.from_json(json_str)
+            instance.actual_instance = ModelNot.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationOneOf3
+        # deserialize data into ChooseFor
         try:
-            instance.actual_instance = ObservationOneOf3.from_json(json_str)
+            instance.actual_instance = ChooseFor.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationOneOf4
+        # deserialize data into GreaterOrEqual
         try:
-            instance.actual_instance = ObservationOneOf4.from_json(json_str)
+            instance.actual_instance = GreaterOrEqual.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationOneOf5
+        # deserialize data into Greater
         try:
-            instance.actual_instance = ObservationOneOf5.from_json(json_str)
+            instance.actual_instance = Greater.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationOneOf6
+        # deserialize data into Lesser
         try:
-            instance.actual_instance = ObservationOneOf6.from_json(json_str)
+            instance.actual_instance = Lesser.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationOneOf7
+        # deserialize data into LesserOrEqual
         try:
-            instance.actual_instance = ObservationOneOf7.from_json(json_str)
+            instance.actual_instance = LesserOrEqual.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ObservationOneOf8
+        # deserialize data into Equal
         try:
-            instance.actual_instance = ObservationOneOf8.from_json(json_str)
+            instance.actual_instance = Equal.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into Observation with oneOf schemas: ObservationOneOf, ObservationOneOf1, ObservationOneOf2, ObservationOneOf3, ObservationOneOf4, ObservationOneOf5, ObservationOneOf6, ObservationOneOf7, ObservationOneOf8, bool. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into Observation with oneOf schemas: ChooseFor, Equal, Greater, GreaterOrEqual, Lesser, LesserOrEqual, ModelAnd, ModelNot, ModelOr, bool. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into Observation with oneOf schemas: ObservationOneOf, ObservationOneOf1, ObservationOneOf2, ObservationOneOf3, ObservationOneOf4, ObservationOneOf5, ObservationOneOf6, ObservationOneOf7, ObservationOneOf8, bool. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into Observation with oneOf schemas: ChooseFor, Equal, Greater, GreaterOrEqual, Lesser, LesserOrEqual, ModelAnd, ModelNot, ModelOr, bool. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -245,13 +245,13 @@ class Observation(BaseModel):
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.dict())
 
-from openapi_client.models.observation_one_of import ObservationOneOf
-from openapi_client.models.observation_one_of1 import ObservationOneOf1
-from openapi_client.models.observation_one_of2 import ObservationOneOf2
-from openapi_client.models.observation_one_of4 import ObservationOneOf4
-from openapi_client.models.observation_one_of5 import ObservationOneOf5
-from openapi_client.models.observation_one_of6 import ObservationOneOf6
-from openapi_client.models.observation_one_of7 import ObservationOneOf7
-from openapi_client.models.observation_one_of8 import ObservationOneOf8
+from openapi_client.models.equal import Equal
+from openapi_client.models.greater import Greater
+from openapi_client.models.greater_or_equal import GreaterOrEqual
+from openapi_client.models.lesser import Lesser
+from openapi_client.models.lesser_or_equal import LesserOrEqual
+from openapi_client.models.model_and import ModelAnd
+from openapi_client.models.model_not import ModelNot
+from openapi_client.models.model_or import ModelOr
 Observation.update_forward_refs()
 

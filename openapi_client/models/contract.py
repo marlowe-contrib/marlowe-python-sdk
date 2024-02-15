@@ -20,29 +20,30 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
+from openapi_client.models.close import Close
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-CONTRACT_ONE_OF_SCHEMAS = ["ContractOneOf", "ContractOneOf1", "ContractOneOf2", "ContractOneOf3", "ContractOneOf4", "str"]
+CONTRACT_ONE_OF_SCHEMAS = ["Close", "Let", "ModelAssert", "ModelIf", "Pay", "When"]
 
 class Contract(BaseModel):
     """
     Contract terms specified in Marlowe
     """
-    # data type: str
-    oneof_schema_1_validator: Optional[StrictStr] = Field(None, description="No more payments will be sent and the balance of the contract is 0.")
-    # data type: ContractOneOf
-    oneof_schema_2_validator: Optional[ContractOneOf] = None
-    # data type: ContractOneOf1
-    oneof_schema_3_validator: Optional[ContractOneOf1] = None
-    # data type: ContractOneOf2
-    oneof_schema_4_validator: Optional[ContractOneOf2] = None
-    # data type: ContractOneOf3
-    oneof_schema_5_validator: Optional[ContractOneOf3] = None
-    # data type: ContractOneOf4
-    oneof_schema_6_validator: Optional[ContractOneOf4] = None
+    # data type: Close
+    oneof_schema_1_validator: Optional[Close] = None
+    # data type: Pay
+    oneof_schema_2_validator: Optional[Pay] = None
+    # data type: ModelIf
+    oneof_schema_3_validator: Optional[ModelIf] = None
+    # data type: When
+    oneof_schema_4_validator: Optional[When] = None
+    # data type: Let
+    oneof_schema_5_validator: Optional[Let] = None
+    # data type: ModelAssert
+    oneof_schema_6_validator: Optional[ModelAssert] = None
     if TYPE_CHECKING:
-        actual_instance: Union[ContractOneOf, ContractOneOf1, ContractOneOf2, ContractOneOf3, ContractOneOf4, str]
+        actual_instance: Union[Close, Let, ModelAssert, ModelIf, Pay, When]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(CONTRACT_ONE_OF_SCHEMAS, const=True)
@@ -65,43 +66,42 @@ class Contract(BaseModel):
         instance = Contract.construct()
         error_messages = []
         match = 0
-        # validate data type: str
-        try:
-            instance.oneof_schema_1_validator = v
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # validate data type: ContractOneOf
-        if not isinstance(v, ContractOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ContractOneOf`")
+        # validate data type: Close
+        if not isinstance(v, Close):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `Close`")
         else:
             match += 1
-        # validate data type: ContractOneOf1
-        if not isinstance(v, ContractOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ContractOneOf1`")
+        # validate data type: Pay
+        if not isinstance(v, Pay):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `Pay`")
         else:
             match += 1
-        # validate data type: ContractOneOf2
-        if not isinstance(v, ContractOneOf2):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ContractOneOf2`")
+        # validate data type: ModelIf
+        if not isinstance(v, ModelIf):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ModelIf`")
         else:
             match += 1
-        # validate data type: ContractOneOf3
-        if not isinstance(v, ContractOneOf3):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ContractOneOf3`")
+        # validate data type: When
+        if not isinstance(v, When):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `When`")
         else:
             match += 1
-        # validate data type: ContractOneOf4
-        if not isinstance(v, ContractOneOf4):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ContractOneOf4`")
+        # validate data type: Let
+        if not isinstance(v, Let):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `Let`")
+        else:
+            match += 1
+        # validate data type: ModelAssert
+        if not isinstance(v, ModelAssert):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ModelAssert`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in Contract with oneOf schemas: ContractOneOf, ContractOneOf1, ContractOneOf2, ContractOneOf3, ContractOneOf4, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in Contract with oneOf schemas: Close, Let, ModelAssert, ModelIf, Pay, When. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in Contract with oneOf schemas: ContractOneOf, ContractOneOf1, ContractOneOf2, ContractOneOf3, ContractOneOf4, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in Contract with oneOf schemas: Close, Let, ModelAssert, ModelIf, Pay, When. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -116,52 +116,49 @@ class Contract(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into str
+        # deserialize data into Close
         try:
-            # validation
-            instance.oneof_schema_1_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.oneof_schema_1_validator
+            instance.actual_instance = Close.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ContractOneOf
+        # deserialize data into Pay
         try:
-            instance.actual_instance = ContractOneOf.from_json(json_str)
+            instance.actual_instance = Pay.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ContractOneOf1
+        # deserialize data into ModelIf
         try:
-            instance.actual_instance = ContractOneOf1.from_json(json_str)
+            instance.actual_instance = ModelIf.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ContractOneOf2
+        # deserialize data into When
         try:
-            instance.actual_instance = ContractOneOf2.from_json(json_str)
+            instance.actual_instance = When.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ContractOneOf3
+        # deserialize data into Let
         try:
-            instance.actual_instance = ContractOneOf3.from_json(json_str)
+            instance.actual_instance = Let.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ContractOneOf4
+        # deserialize data into ModelAssert
         try:
-            instance.actual_instance = ContractOneOf4.from_json(json_str)
+            instance.actual_instance = ModelAssert.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into Contract with oneOf schemas: ContractOneOf, ContractOneOf1, ContractOneOf2, ContractOneOf3, ContractOneOf4, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into Contract with oneOf schemas: Close, Let, ModelAssert, ModelIf, Pay, When. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into Contract with oneOf schemas: ContractOneOf, ContractOneOf1, ContractOneOf2, ContractOneOf3, ContractOneOf4, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into Contract with oneOf schemas: Close, Let, ModelAssert, ModelIf, Pay, When. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -192,10 +189,10 @@ class Contract(BaseModel):
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.dict())
 
-from openapi_client.models.contract_one_of import ContractOneOf
-from openapi_client.models.contract_one_of1 import ContractOneOf1
-from openapi_client.models.contract_one_of2 import ContractOneOf2
-from openapi_client.models.contract_one_of3 import ContractOneOf3
-from openapi_client.models.contract_one_of4 import ContractOneOf4
+from openapi_client.models.let import Let
+from openapi_client.models.model_assert import ModelAssert
+from openapi_client.models.model_if import ModelIf
+from openapi_client.models.pay import Pay
+from openapi_client.models.when import When
 Contract.update_forward_refs()
 

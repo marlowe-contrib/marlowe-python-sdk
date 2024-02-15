@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **inputs** | [**List[Input]**](Input.md) |  | 
 **invalid_before** | **str** |  | [optional] 
 **invalid_hereafter** | **str** |  | [optional] 
-**metadata** | **Dict[str, object]** |  | 
-**tags** | **Dict[str, object]** |  | 
+**metadata** | [**Dict[str, Metadata]**](Metadata.md) |  | 
+**tags** | [**Dict[str, Metadata]**](Metadata.md) |  | 
 **version** | [**MarloweVersion**](MarloweVersion.md) |  | 
 
 ## Example

@@ -20,34 +20,35 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.input_one_of import InputOneOf
-from openapi_client.models.input_one_of1 import InputOneOf1
-from openapi_client.models.input_one_of2 import InputOneOf2
-from openapi_client.models.input_one_of3 import InputOneOf3
-from openapi_client.models.input_one_of4 import InputOneOf4
+from openapi_client.models.choice_continuation_input import ChoiceContinuationInput
+from openapi_client.models.choice_input import ChoiceInput
+from openapi_client.models.continuation_input import ContinuationInput
+from openapi_client.models.deposit_continuation_input import DepositContinuationInput
+from openapi_client.models.deposit_input import DepositInput
+from openapi_client.models.notify_input import NotifyInput
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-INPUT_ONE_OF_SCHEMAS = ["InputOneOf", "InputOneOf1", "InputOneOf2", "InputOneOf3", "InputOneOf4", "str"]
+INPUT_ONE_OF_SCHEMAS = ["ChoiceContinuationInput", "ChoiceInput", "ContinuationInput", "DepositContinuationInput", "DepositInput", "NotifyInput"]
 
 class Input(BaseModel):
     """
     An input to a Marlowe transaction
     """
-    # data type: InputOneOf
-    oneof_schema_1_validator: Optional[InputOneOf] = None
-    # data type: str
-    oneof_schema_2_validator: Optional[StrictStr] = Field(None, description="Notify a contract to check a condition")
-    # data type: InputOneOf1
-    oneof_schema_3_validator: Optional[InputOneOf1] = None
-    # data type: InputOneOf2
-    oneof_schema_4_validator: Optional[InputOneOf2] = None
-    # data type: InputOneOf3
-    oneof_schema_5_validator: Optional[InputOneOf3] = None
-    # data type: InputOneOf4
-    oneof_schema_6_validator: Optional[InputOneOf4] = None
+    # data type: ContinuationInput
+    oneof_schema_1_validator: Optional[ContinuationInput] = None
+    # data type: NotifyInput
+    oneof_schema_2_validator: Optional[NotifyInput] = None
+    # data type: ChoiceContinuationInput
+    oneof_schema_3_validator: Optional[ChoiceContinuationInput] = None
+    # data type: ChoiceInput
+    oneof_schema_4_validator: Optional[ChoiceInput] = None
+    # data type: DepositInput
+    oneof_schema_5_validator: Optional[DepositInput] = None
+    # data type: DepositContinuationInput
+    oneof_schema_6_validator: Optional[DepositContinuationInput] = None
     if TYPE_CHECKING:
-        actual_instance: Union[InputOneOf, InputOneOf1, InputOneOf2, InputOneOf3, InputOneOf4, str]
+        actual_instance: Union[ChoiceContinuationInput, ChoiceInput, ContinuationInput, DepositContinuationInput, DepositInput, NotifyInput]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(INPUT_ONE_OF_SCHEMAS, const=True)
@@ -70,43 +71,42 @@ class Input(BaseModel):
         instance = Input.construct()
         error_messages = []
         match = 0
-        # validate data type: InputOneOf
-        if not isinstance(v, InputOneOf):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `InputOneOf`")
+        # validate data type: ContinuationInput
+        if not isinstance(v, ContinuationInput):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ContinuationInput`")
         else:
             match += 1
-        # validate data type: str
-        try:
-            instance.oneof_schema_2_validator = v
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # validate data type: InputOneOf1
-        if not isinstance(v, InputOneOf1):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `InputOneOf1`")
+        # validate data type: NotifyInput
+        if not isinstance(v, NotifyInput):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `NotifyInput`")
         else:
             match += 1
-        # validate data type: InputOneOf2
-        if not isinstance(v, InputOneOf2):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `InputOneOf2`")
+        # validate data type: ChoiceContinuationInput
+        if not isinstance(v, ChoiceContinuationInput):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ChoiceContinuationInput`")
         else:
             match += 1
-        # validate data type: InputOneOf3
-        if not isinstance(v, InputOneOf3):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `InputOneOf3`")
+        # validate data type: ChoiceInput
+        if not isinstance(v, ChoiceInput):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ChoiceInput`")
         else:
             match += 1
-        # validate data type: InputOneOf4
-        if not isinstance(v, InputOneOf4):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `InputOneOf4`")
+        # validate data type: DepositInput
+        if not isinstance(v, DepositInput):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DepositInput`")
+        else:
+            match += 1
+        # validate data type: DepositContinuationInput
+        if not isinstance(v, DepositContinuationInput):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DepositContinuationInput`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in Input with oneOf schemas: InputOneOf, InputOneOf1, InputOneOf2, InputOneOf3, InputOneOf4, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in Input with oneOf schemas: ChoiceContinuationInput, ChoiceInput, ContinuationInput, DepositContinuationInput, DepositInput, NotifyInput. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in Input with oneOf schemas: InputOneOf, InputOneOf1, InputOneOf2, InputOneOf3, InputOneOf4, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in Input with oneOf schemas: ChoiceContinuationInput, ChoiceInput, ContinuationInput, DepositContinuationInput, DepositInput, NotifyInput. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -121,52 +121,49 @@ class Input(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into InputOneOf
+        # deserialize data into ContinuationInput
         try:
-            instance.actual_instance = InputOneOf.from_json(json_str)
+            instance.actual_instance = ContinuationInput.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into str
+        # deserialize data into NotifyInput
         try:
-            # validation
-            instance.oneof_schema_2_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.oneof_schema_2_validator
+            instance.actual_instance = NotifyInput.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into InputOneOf1
+        # deserialize data into ChoiceContinuationInput
         try:
-            instance.actual_instance = InputOneOf1.from_json(json_str)
+            instance.actual_instance = ChoiceContinuationInput.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into InputOneOf2
+        # deserialize data into ChoiceInput
         try:
-            instance.actual_instance = InputOneOf2.from_json(json_str)
+            instance.actual_instance = ChoiceInput.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into InputOneOf3
+        # deserialize data into DepositInput
         try:
-            instance.actual_instance = InputOneOf3.from_json(json_str)
+            instance.actual_instance = DepositInput.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into InputOneOf4
+        # deserialize data into DepositContinuationInput
         try:
-            instance.actual_instance = InputOneOf4.from_json(json_str)
+            instance.actual_instance = DepositContinuationInput.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into Input with oneOf schemas: InputOneOf, InputOneOf1, InputOneOf2, InputOneOf3, InputOneOf4, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into Input with oneOf schemas: ChoiceContinuationInput, ChoiceInput, ContinuationInput, DepositContinuationInput, DepositInput, NotifyInput. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into Input with oneOf schemas: InputOneOf, InputOneOf1, InputOneOf2, InputOneOf3, InputOneOf4, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into Input with oneOf schemas: ChoiceContinuationInput, ChoiceInput, ContinuationInput, DepositContinuationInput, DepositInput, NotifyInput. Details: " + ", ".join(error_messages))
         else:
             return instance
 
